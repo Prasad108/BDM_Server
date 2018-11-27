@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="bdm" match-name=".*"/>
+  <table-filter match-catalog="bdm" match-name="book"/>
+  <table-filter match-catalog="bdm" match-name="cb_details"/>
+  <table-filter match-catalog="bdm" match-name="center"/>
+  <table-filter match-catalog="bdm" match-name="challan"/>
+  <table-filter match-catalog="bdm" match-name="inventry"/>
+  <table-filter match-catalog="bdm" match-name="languages"/>
+  <table-filter match-catalog="bdm" match-name="roles"/>
+  <table-filter match-catalog="bdm" match-name="type"/>
+  <table-filter match-catalog="bdm" match-name="user"/>
+  <table-filter match-schema="assign1db" match-name=".*" exclude="true"/>
+  <table-filter match-schema="demo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="sakila" match-name=".*" exclude="true"/>
+  <table-filter match-schema="sys" match-name=".*" exclude="true"/>
+  <table-filter match-schema="tutesmessanger" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0m_acs_monitor_casa" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0m_acs_monitor_nps" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0m_acs_monitor_u5b" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0m_acs_monitor_u8f" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0m_acs_monitor_u9f" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0p_acs_ws" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0p_acs_ws_abk" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0p_acs_ws_nm" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u0p_acs_ws_test" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u5b_acs_bo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u5b_acs_bo_abk" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u5b_acs_bo_nm" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u5b_acs_fo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u5b_bvb_acs_bo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u6f_acs_fo_nps" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u7f_acs_fo_casa" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u8f_acs_bo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u8f_acs_fo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="u9f_acs_fo" match-name=".*" exclude="true"/>
+</hibernate-reverse-engineering>
