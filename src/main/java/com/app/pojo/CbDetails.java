@@ -19,11 +19,11 @@ import javax.persistence.Table;
 public class CbDetails implements java.io.Serializable {
 
 	private Integer id;
-	private Book book;
-	private Challan challan;
+	private transient Book book;
+	private transient Challan challan;
 	private int rate;
 	private int quantity;
-	private Integer returned;
+	private transient Integer returned;
 	private int saleValue;
 
 	public CbDetails() {

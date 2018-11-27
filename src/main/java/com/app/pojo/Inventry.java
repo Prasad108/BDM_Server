@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Inventry implements java.io.Serializable {
 
 	private Integer id;
-	private Book book;
+	private transient Book book;
 	private int quantity;
 
 	public Inventry() {

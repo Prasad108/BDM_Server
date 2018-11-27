@@ -24,7 +24,7 @@ public class Center implements java.io.Serializable {
 	private String pm;
 	private String location;
 	private String pocDetails;
-	private Set<User> users = new HashSet<User>(0);
+	private transient Set<User> users = new HashSet<User>(0);
 
 	public Center() {
 	}

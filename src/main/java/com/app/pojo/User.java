@@ -23,16 +23,16 @@ import javax.persistence.UniqueConstraint;
 public class User implements java.io.Serializable {
 
 	private Integer id;
-	private Center center;
-	private Roles roles;
+	private transient Center center;
+	private transient Roles roles;
 	private String name;
 	private String counceller;
 	private String email;
 	private String mob;
 	private String uname;
 	private String pwd;
-	private Set<Challan> challansForIssuedTo = new HashSet<Challan>(0);
-	private Set<Challan> challansForIssuedBy = new HashSet<Challan>(0);
+	private transient Set<Challan> challansForIssuedTo = new HashSet<Challan>(0);
+	private transient Set<Challan> challansForIssuedBy = new HashSet<Challan>(0);
 
 	public User() {
 	}

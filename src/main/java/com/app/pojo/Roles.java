@@ -22,7 +22,7 @@ public class Roles implements java.io.Serializable {
 
 	private Integer id;
 	private String role;
-	private Set<User> users = new HashSet<User>(0);
+	private transient Set<User> users = new HashSet<User>(0);
 
 	public Roles() {
 	}

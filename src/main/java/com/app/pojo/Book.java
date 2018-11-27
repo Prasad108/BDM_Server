@@ -22,12 +22,12 @@ import javax.persistence.Table;
 public class Book implements java.io.Serializable {
 
 	private Integer id;
-	private Languages languages;
-	private Type type;
+	private transient Languages languages;
+	private transient Type type;
 	private String name;
 	private int price;
-	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
-	private Set<Inventry> inventries = new HashSet<Inventry>(0);
+	private transient Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
+	private transient Set<Inventry> inventries = new HashSet<Inventry>(0);
 
 	public Book() {
 	}

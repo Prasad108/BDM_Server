@@ -50,11 +50,22 @@ public class UserController {
 	UserService userService;
 	
 	
-	
 	@RequestMapping(value = "/getAllLanguages", method = RequestMethod.GET)
-	public String showPerson() {
+	public String getAllLanguages() {
 		System.out.println("**********inside getAllLanguages controller**********");
 		return gson.toJson(languagesService.getall());
+	}
+	
+	@RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
+	public String getAllBooks() {
+		System.out.println("**********inside getAllBooks controller**********");
+		return gson.toJson(bookService.getall());
+	}
+	
+	@RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
+	public String getAllUser() {
+		System.out.println("**********inside getAllUser controller**********");
+		return gson.toJson(userService.getall());
 	}
 
 }

@@ -25,15 +25,15 @@ import javax.persistence.TemporalType;
 public class Challan implements java.io.Serializable {
 
 	private Integer id;
-	private User userByIssuedTo;
-	private User userByIssuedBy;
+	private transient User userByIssuedTo;
+	private transient User userByIssuedBy;
 	private Date date;
 	private Integer totalAmount;
 	private Integer receivedAmount;
 	private Integer expAmount;
 	private String expComment;
 	private byte settled;
-	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
+	private transient Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
 
 	public Challan() {
 	}
