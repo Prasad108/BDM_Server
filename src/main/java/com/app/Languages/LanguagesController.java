@@ -1,0 +1,47 @@
+package com.app.Languages;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+
+@RestController
+@RequestMapping("/languages") 
+public class LanguagesController {
+	
+	@Autowired
+	LanguagesService languagesService;
+	
+	Gson gson = new Gson();
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getAllLanguages() {
+		System.out.println("***************** getAllLanguages *****************");
+	return gson.toJson(languagesService.getall());
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Languages getLanguages(@PathVariable Integer id) {
+		return languagesService.find(id);
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.PUT)
+	public void addLanguages(@RequestBody Languages languages) {
+		languagesService.create(languages);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void updateLanguages(@PathVariable Integer id,@RequestBody Languages languages) {
+		languagesService.update(languages);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deletBook(@PathVariable Integer id) {
+		languagesService.delet(id);
+	}
+
+}

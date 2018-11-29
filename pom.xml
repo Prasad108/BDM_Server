@@ -30,10 +30,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web-services</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,7 +60,7 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<!--  https://mvnrepository.com/artifact/org.hibernate/hibernate-core 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -72,43 +68,49 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.5.Final</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.5.Final</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-envers -->
+		
+		 https://mvnrepository.com/artifact/org.hibernate/hibernate-envers 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
 			<version>5.2.5.Final</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>5.0.2.RELEASE</version>
 		</dependency>
-
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>5.1.1.RELEASE</version>
 		</dependency>
+ -->
+
+		
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		
 
 
 
