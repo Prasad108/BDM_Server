@@ -18,7 +18,6 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
-	Gson gson = new Gson();
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Book> getAllBooks() {

@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-schema="bdm" match-name=".*"/>
   <table-filter match-schema="assign1db" match-name=".*" exclude="true"/>
   <table-filter match-schema="demo" match-name=".*" exclude="true"/>
   <table-filter match-schema="sakila" match-name=".*" exclude="true"/>
@@ -27,4 +26,14 @@
   <table-filter match-schema="u8f_acs_bo" match-name=".*" exclude="true"/>
   <table-filter match-schema="u8f_acs_fo" match-name=".*" exclude="true"/>
   <table-filter match-schema="u9f_acs_fo" match-name=".*" exclude="true"/>
+  <table-filter match-schema="bdm" match-name=".*"/>
+  <table-filter match-catalog="bdm" match-name="book"/>
+  <table-filter match-catalog="bdm" match-name="cb_details"/>
+  <table-filter match-catalog="bdm" match-name="center"/>
+  <table-filter match-catalog="bdm" match-name="challan"/>
+  <table-filter match-catalog="bdm" match-name="inventry"/>
+  <table-filter match-catalog="bdm" match-name="languages"/>
+  <table-filter match-catalog="bdm" match-name="roles"/>
+  <table-filter match-catalog="bdm" match-name="type"/>
+  <table-filter match-catalog="bdm" match-name="user"/>
 </hibernate-reverse-engineering>

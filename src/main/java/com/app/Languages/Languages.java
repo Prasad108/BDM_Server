@@ -1,5 +1,5 @@
 package com.app.Languages;
-// Generated 27 Nov, 2018 4:45:20 PM by Hibernate Tools 5.2.10.Final
+// Generated 29 Nov, 2018 1:33:50 PM by Hibernate Tools 5.2.10.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +25,7 @@ public class Languages implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	@JsonIgnore
-	private transient Set<Book> books = new HashSet<Book>(0);
+	private Set<Book> books = new HashSet<Book>(0);
 
 	public Languages() {
 	}

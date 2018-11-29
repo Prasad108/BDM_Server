@@ -1,25 +1,23 @@
 package com.app.Book;
-// Generated 27 Nov, 2018 4:45:20 PM by Hibernate Tools 5.2.10.Final
-
-import static javax.persistence.GenerationType.IDENTITY;
+// Generated 29 Nov, 2018 1:33:50 PM by Hibernate Tools 5.2.10.Final
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.app.Inventry.Inventry;
 import com.app.Languages.Languages;
 import com.app.Type.Type;
 import com.app.pojo.CbDetails;
-import com.app.pojo.Inventry;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,22 +31,18 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Book implements java.io.Serializable {
 
 	private Integer id;
-	
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
-	@JsonIdentityReference(alwaysAsId=true)
-	private  Languages languages;
-	
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 	@JsonIdentityReference(alwaysAsId=true)
-	private transient Type type;
-	
+	private Languages languages;
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityReference(alwaysAsId=true)
+	private Type type;
 	private String name;
 	private int price;
-	
 	@JsonIgnore
-	private transient Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
+	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
 	@JsonIgnore
-	private transient Set<Inventry> inventries = new HashSet<Inventry>(0);
+	private Set<Inventry> inventries = new HashSet<Inventry>(0);
 
 	public Book() {
 	}

@@ -14,12 +14,12 @@ public class CenterService  {
 	@Autowired
 	CenterRepository centerRepository;
 	
-	public void create(Center center) {
-		centerRepository.save(center);
+	public void create(Center Center) {
+		centerRepository.save(Center);
 	}
 
-	public void update(Center center) {
-		centerRepository.save(center);
+	public void update(Center Center) {
+		centerRepository.save(Center);
 	}
 
 	public void delet(Integer id) {

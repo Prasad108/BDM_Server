@@ -1,4 +1,4 @@
-package com.app.Languages;
+package com.app.Inventry;
 
 import java.util.List;
 
@@ -12,36 +12,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 @RestController
-@RequestMapping("/languages") 
-public class LanguagesController {
+@RequestMapping("/inventry") 
+public class InventryController {
 	
 	@Autowired
-	LanguagesService languagesService;
+	InventryService inventryService;
+	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Languages> getAllLanguages() {
-		System.out.println("***************** getAllLanguages *****************");
-	return languagesService.getall();
+	public List<Inventry> getAllInventrys() {
+	return inventryService.getall();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Languages getLanguages(@PathVariable Integer id) {
-		return languagesService.find(id);
+	public Inventry getInventry(@PathVariable Integer id) {
+		return inventryService.find(id);
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addLanguages(@RequestBody Languages languages) {
-		languagesService.create(languages);
+	public Inventry addInventry(@RequestBody Inventry inventry) {
+		return inventryService.create(inventry);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateLanguages(@PathVariable Integer id,@RequestBody Languages languages) {
-		languagesService.update(languages);
+	public Inventry updateInventry(@PathVariable Integer id,@RequestBody Inventry inventry) {
+		return inventryService.update(inventry);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void deletBook(@PathVariable Integer id) {
-		languagesService.delet(id);
+	public void deletInventry(@PathVariable Integer id) {
+		inventryService.delet(id);
 	}
 
 }

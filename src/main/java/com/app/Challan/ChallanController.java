@@ -1,4 +1,4 @@
-package com.app.Languages;
+package com.app.Challan;
 
 import java.util.List;
 
@@ -12,36 +12,41 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 @RestController
-@RequestMapping("/languages") 
-public class LanguagesController {
-	
+@RequestMapping("/challan") 
+public class ChallanController {
+
 	@Autowired
-	LanguagesService languagesService;
-	
+	ChallanService challanService;
+
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Languages> getAllLanguages() {
-		System.out.println("***************** getAllLanguages *****************");
-	return languagesService.getall();
+	public List<Challan> getAllChallans() {
+		return challanService.getall();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Languages getLanguages(@PathVariable Integer id) {
-		return languagesService.find(id);
+	public Challan getChallan(@PathVariable Integer id) {
+		return challanService.find(id);
 	}
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addLanguages(@RequestBody Languages languages) {
-		languagesService.create(languages);
+	public void addChallan(@RequestBody Challan challan) {
+		challanService.create(challan);
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateLanguages(@PathVariable Integer id,@RequestBody Languages languages) {
-		languagesService.update(languages);
+	public void updateChallan(@PathVariable Integer id,@RequestBody Challan challan) {
+		challanService.update(challan);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deletChallan(@PathVariable Integer id) {
+		challanService.delet(id);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void deletBook(@PathVariable Integer id) {
-		languagesService.delet(id);
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	public List<Challan> getUserChallans(@PathVariable Integer id) {
+		return challanService.findByUserByIssuedTo(id);
 	}
 
 }
