@@ -25,10 +25,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class CbDetails implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Book book;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Challan.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Challan challan;
 	private int rate;

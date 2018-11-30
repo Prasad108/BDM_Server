@@ -31,10 +31,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class User implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Center.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Center center;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Roles.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Roles roles;
 	private String name;

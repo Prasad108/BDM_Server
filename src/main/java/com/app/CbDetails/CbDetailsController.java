@@ -43,5 +43,7 @@ public class CbDetailsController {
 	public void deletCbDetails(@PathVariable Integer id) {
 		cbDetailsService.delet(id);
 	}
+	
+	
 
 }

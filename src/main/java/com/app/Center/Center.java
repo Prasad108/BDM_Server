@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Center implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Inventry.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Inventry inventry;
 	private String name;

@@ -32,10 +32,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Challan implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = User.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private User userByIssuedTo;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = User.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private User userByIssuedBy;
 	private Date issuedDate;
@@ -45,8 +45,8 @@ public class Challan implements java.io.Serializable {
 	private Integer expAmount;
 	private String expComment;
 	private byte settled;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-	@JsonIdentityReference(alwaysAsId=true)
+//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
+//	@JsonIdentityReference(alwaysAsId=true)
 	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
 
 	public Challan() {

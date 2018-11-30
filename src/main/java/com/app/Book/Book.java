@@ -31,10 +31,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Book implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Languages.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Languages languages;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Type.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Type type;
 	private String name;

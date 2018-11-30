@@ -28,11 +28,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Inventry implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Book book;
 	private int quantity;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Center.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Set<Center> centers = new HashSet<Center>(0);
 
