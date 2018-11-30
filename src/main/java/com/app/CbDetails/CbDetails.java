@@ -1,4 +1,4 @@
-package com.app.pojo;
+package com.app.CbDetails;
 // Generated 29 Nov, 2018 1:33:50 PM by Hibernate Tools 5.2.10.Final
 
 import javax.persistence.Column;

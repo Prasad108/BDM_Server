@@ -14,10 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.app.CbDetails.CbDetails;
 import com.app.Inventry.Inventry;
 import com.app.Languages.Languages;
 import com.app.Type.Type;
-import com.app.pojo.CbDetails;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
