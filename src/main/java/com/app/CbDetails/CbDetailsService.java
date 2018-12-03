@@ -25,12 +25,12 @@ public class CbDetailsService  {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	public void create(CbDetails cbDetails) {
-		cbDetailsRepository.save(cbDetails);
+	public CbDetails create(CbDetails cbDetails) {
+		return cbDetailsRepository.save(cbDetails);
 	}
 
-	public void update(CbDetails cbDetails) {
-		cbDetailsRepository.save(cbDetails);
+	public CbDetails update(CbDetails cbDetails) {
+		return cbDetailsRepository.save(cbDetails);
 	}
 
 	public void delet(Integer id) {

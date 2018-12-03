@@ -27,16 +27,16 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addType(@RequestBody Type type) {
-		typeService.create(type);
+	public Type addType(@RequestBody Type type) {
+		return typeService.create(type);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateType(@PathVariable Integer id,@RequestBody Type type) {
-		typeService.update(type);
+	public Type updateType(@PathVariable Integer id,@RequestBody Type type) {
+		return typeService.update(type);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletType(@PathVariable Integer id) {
 		typeService.delet(id);
 	}

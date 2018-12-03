@@ -28,12 +28,12 @@ public class BookService  {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	public void create(Book book) {
-		bookRepository.save(book);
+	public Book create(Book book) {
+		return bookRepository.save(book);
 	}
 
-	public void update(Book book) {
-		bookRepository.save(book);
+	public Book update(Book book) {
+		return bookRepository.save(book);
 	}
 
 	public void delet(Integer id) {

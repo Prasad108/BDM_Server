@@ -14,12 +14,12 @@ public class TypeService  {
 	@Autowired
 	TypeRepository typeRepository;
 	
-	public void create(Type type) {
-		typeRepository.save(type);
+	public Type create(Type type) {
+		return typeRepository.save(type);
 	}
 
-	public void update(Type type) {
-		typeRepository.save(type);
+	public Type update(Type type) {
+		return typeRepository.save(type);
 	}
 
 	public void delet(Integer id) {

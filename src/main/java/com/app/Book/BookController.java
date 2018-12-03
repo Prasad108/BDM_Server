@@ -39,17 +39,17 @@ public class BookController {
 		return bookService.find(id);
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addBook(@RequestBody Book book) {
-		bookService.create(book);
+	@RequestMapping(value = "/", method = RequestMethod.PUT,produces = "application/json")
+	public Book addBook(@RequestBody Book book) {
+		return bookService.create(book);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateBook(@PathVariable Integer id,@RequestBody Book book) {
-		bookService.update(book);
+	public Book updateBook(@PathVariable Integer id,@RequestBody Book book) {
+		return bookService.update(book);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBook(@PathVariable Integer id) {
 		bookService.delet(id);
 	}

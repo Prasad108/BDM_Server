@@ -37,7 +37,7 @@ public class RolesController {
 		rolesService.update(roles);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletRoles(@PathVariable Integer id) {
 		rolesService.delet(id);
 	}

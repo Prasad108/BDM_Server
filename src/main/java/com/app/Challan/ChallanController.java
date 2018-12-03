@@ -45,16 +45,16 @@ public class ChallanController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addChallan(@RequestBody Challan challan) {
-		challanService.create(challan);
+	public Challan addChallan(@RequestBody Challan challan) {
+		return challanService.create(challan);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateChallan(@PathVariable Integer id,@RequestBody Challan challan) {
-		challanService.update(challan);
+	public Challan updateChallan(@PathVariable Integer id,@RequestBody Challan challan) {
+		return challanService.update(challan);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletChallan(@PathVariable Integer id) {
 		challanService.delet(id);
 	}

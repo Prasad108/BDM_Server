@@ -27,16 +27,16 @@ public class CenterController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addCenter(@RequestBody Center center) {
-		centerService.create(center);
+	public Center addCenter(@RequestBody Center center) {
+		return centerService.create(center);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void updateCenter(@PathVariable Integer id,@RequestBody Center center) {
-		centerService.update(center);
+	public Center updateCenter(@PathVariable Integer id,@RequestBody Center center) {
+		return centerService.update(center);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void updateCenter(@PathVariable Integer id) {
 		centerService.delet(id);
 	}

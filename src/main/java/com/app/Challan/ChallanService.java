@@ -33,12 +33,12 @@ public class ChallanService  {
 	
 	final JsonNodeFactory jsonFactory = JsonNodeFactory.instance;
 	
-	public void create(Challan challan) {
-		challanRepository.save(challan);
+	public Challan create(Challan challan) {
+		return challanRepository.save(challan);
 	}
 
-	public void update(Challan challan) {
-		challanRepository.save(challan);
+	public Challan update(Challan challan) {
+		return challanRepository.save(challan);
 	}
 
 	public void delet(Integer id) {

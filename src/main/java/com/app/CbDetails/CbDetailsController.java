@@ -37,8 +37,8 @@ public class CbDetailsController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addCbDetails(@RequestBody CbDetails cbDetails) {
-		cbDetailsService.create(cbDetails);
+	public CbDetails addCbDetails(@RequestBody CbDetails cbDetails) {
+		return cbDetailsService.create(cbDetails);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -46,7 +46,7 @@ public class CbDetailsController {
 		cbDetailsService.update(cbDetails);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletCbDetails(@PathVariable Integer id) {
 		cbDetailsService.delet(id);
 	}

@@ -37,7 +37,7 @@ public class LanguagesController {
 		languagesService.update(languages);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBook(@PathVariable Integer id) {
 		languagesService.delet(id);
 	}
