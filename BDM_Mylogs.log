@@ -1,0 +1,70 @@
+2018-12-03 11:06:19.525  INFO 6236 --- [main] istributionAccountsManagementApplication : Starting BookDistributionAccountsManagementApplication on MC0YHA8C with PID 6236 (C:\Users\a664162\eclipse-workspace\BDM\BDM_server\target\classes started by A664162 in C:\Users\a664162\eclipse-workspace\BDM\BDM_server)
+2018-12-03 11:06:19.588  INFO 6236 --- [main] istributionAccountsManagementApplication : The following profiles are active: devOffice
+2018-12-03 11:06:21.792  INFO 6236 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2018-12-03 11:06:21.986  INFO 6236 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 175ms. Found 9 repository interfaces.
+2018-12-03 11:06:22.585  INFO 6236 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$28c9d412] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-12-03 11:06:23.463  INFO 6236 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2018-12-03 11:06:23.509  INFO 6236 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-12-03 11:06:23.510  INFO 6236 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
+2018-12-03 11:06:23.538  INFO 6236 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_161/bin/server;C:/Program Files/Java/jre1.8.0_161/bin;C:/Program Files/Java/jre1.8.0_161/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Users\a664162\jboss-eap-6.4.11\bin;C:\Program Files\Java\jdk1.8.0_161\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\opt\apache-maven-3.6.0\bin;C:\docker4wl\cwRsync;C:\docker4wl\bin;C:\Program Files\Microsoft VS Code\bin;C:\HashiCorp\Vagrant\bin;C:\Users\a664162\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Users\a664162\AppData\Local\Yarn\bin;C:\Users\a664162\AppData\Local\Programs\Fiddler;C:\Users\a664162\eclips\eclipse;;.]
+2018-12-03 11:06:23.776  INFO 6236 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-12-03 11:06:23.777 DEBUG 6236 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2018-12-03 11:06:23.777  INFO 6236 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3869 ms
+2018-12-03 11:06:23.844  INFO 6236 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2018-12-03 11:06:23.848  INFO 6236 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-12-03 11:06:23.848  INFO 6236 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-12-03 11:06:23.848  INFO 6236 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
+2018-12-03 11:06:23.849  INFO 6236 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-12-03 11:06:24.274  INFO 6236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-12-03 11:06:24.276  WARN 6236 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-12-03 11:06:24.586  INFO 6236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-12-03 11:06:28.092  INFO 6236 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-12-03 11:06:28.900  WARN 6236 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'typeController' defined in file [C:\Users\a664162\eclipse-workspace\BDM\BDM_server\target\classes\com\app\Type\TypeController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.app.Type.TypeController]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: com/google/gson/Gson
+2018-12-03 11:06:28.903  INFO 6236 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-12-03 11:06:28.905  INFO 6236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-12-03 11:06:28.910  INFO 6236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-12-03 11:06:28.911  INFO 6236 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2018-12-03 11:06:28.974  INFO 6236 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-12-03 11:06:29.147 ERROR 6236 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'typeController' defined in file [C:\Users\a664162\eclipse-workspace\BDM\BDM_server\target\classes\com\app\Type\TypeController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.app.Type.TypeController]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1270) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1164) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:538) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546) ~[spring-context-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) [spring-boot-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.app.BookDistributionAccountsManagementApplication.main(BookDistributionAccountsManagementApplication.java:10) [classes/:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.app.Type.TypeController]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:184) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1262) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 17 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: com/google/gson/Gson
+	at com.app.Type.TypeController.<init>(TypeController.java:21) ~[classes/:na]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_161]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_161]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:172) ~[spring-beans-5.1.2.RELEASE.jar:5.1.2.RELEASE]
+	... 19 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_161]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_161]
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:338) ~[na:1.8.0_161]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_161]
+	... 25 common frames omitted
+

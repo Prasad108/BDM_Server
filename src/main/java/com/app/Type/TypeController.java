@@ -9,16 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
-
 @RestController
 @RequestMapping("/type") 
 public class TypeController {
 	
 	@Autowired
 	TypeService typeService;
-	
-	Gson gson = new Gson();
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Type> getAllTypes() {
