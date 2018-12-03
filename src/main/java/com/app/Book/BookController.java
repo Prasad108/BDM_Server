@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.Languages.LanguagesService;
+import com.app.Type.TypeService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 
 @RestController
@@ -17,6 +22,14 @@ public class BookController {
 	
 	@Autowired
 	BookService bookService;
+	
+	@Autowired
+	LanguagesService languagesService;
+	
+	@Autowired
+	TypeService typeService;
+	
+	ObjectMapper mapper = new ObjectMapper();
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -42,6 +55,11 @@ public class BookController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deletBook(@PathVariable Integer id) {
 		bookService.delet(id);
+	}
+	
+	@RequestMapping(value = "/detailed/{id}", method = RequestMethod.GET,produces = "application/json")
+	public String getDetailedBook(@PathVariable Integer id) {
+		return bookService.getDetailedBook(id);
 	}
 
 }

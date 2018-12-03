@@ -21,6 +21,7 @@ import com.app.Role.Roles;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name = "user", catalog = "bdm", uniqueConstraints = @UniqueConstraint(columnNames = "uname"))
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements java.io.Serializable {
 
 	private Integer id;

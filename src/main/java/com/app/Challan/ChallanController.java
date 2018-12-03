@@ -1,7 +1,7 @@
 package com.app.Challan;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.Book.BookController;
-import com.app.CbDetails.CbDetails;
-import com.google.gson.Gson;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
+import com.app.Book.BookService;
+import com.app.User.UserService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/challan") 
@@ -23,7 +23,15 @@ public class ChallanController {
 	@Autowired
 	ChallanService challanService;
 	
-	BookController bookController;
+	@Autowired
+	BookService bookService;
+	
+	@Autowired
+	UserService userService;
+	
+	
+	
+	ObjectMapper mapper = new ObjectMapper();
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -56,19 +64,9 @@ public class ChallanController {
 		return challanService.findByUserByIssuedTo(id);
 	}
 	
-	@RequestMapping(value = "/detailed/{id}", method = RequestMethod.GET)
-	public Challan getDetailedChallan(@PathVariable Integer id) {
-		Challan ch=challanService.find(id);
-		
-		List<CbDetails> chi=ch.getCbDetailses().stream()
-		.map(e->{
-			e.setBook(bookController.getBook(e.getBook().getId()));
-			return e;})
-		.collect(Collectors.toList());
-		
-		chi.forEach(System.out::println);;
-		
-		return challanService.find(id);
+	@RequestMapping(value = "/detailed/{id}", method = RequestMethod.GET,produces = "application/json")
+	public String getDetailedChallan(@PathVariable Integer id) throws IOException {
+		return challanService.getDetailedChallan(id);
 	}
 
 }
