@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,21 +44,27 @@ public class ChallanController {
 	public Challan getChallan(@PathVariable Integer id) {
 		return challanService.find(id);
 	}
-
+	
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public Challan addChallan(@RequestBody Challan challan) {
 		return challanService.create(challan);
 	}
-
+	
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Challan updateChallan(@PathVariable Integer id,@RequestBody Challan challan) {
 		return challanService.update(challan);
 	}
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletChallan(@PathVariable Integer id) {
 		challanService.delet(id);
 	}
+	
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public List<Challan> getUserChallans(@PathVariable Integer id) {

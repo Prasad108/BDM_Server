@@ -1,8 +1,8 @@
 package com.app.security.message;
 
-import java.util.Set;
- 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
  
 public class SignUpForm {
     @NotBlank
@@ -18,13 +18,39 @@ public class SignUpForm {
     @Email
     private String email;
     
-    private Set<String> role;
+    private int role;
     
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+    
+   
+    private int center;
+    
+    @NotBlank
+    private String counceller;
+    
+    @NotBlank
+    @Size(min = 10, max = 11)
+    private String mob;
  
-    public String getName() {
+    public String getCounceller() {
+		return counceller;
+	}
+
+	public void setCounceller(String counceller) {
+		this.counceller = counceller;
+	}
+
+	public String getMob() {
+		return mob;
+	}
+
+	public void setMob(String mob) {
+		this.mob = mob;
+	}
+
+	public String getName() {
         return name;
     }
  
@@ -52,15 +78,25 @@ public class SignUpForm {
         return password;
     }
  
-    public void setPassword(String password) {
+    public int getCenter() {
+		return center;
+	}
+
+	public void setCenter(int center) {
+		this.center = center;
+	}
+
+	public void setPassword(String password) {
         this.password = password;
     }
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
     
-    public Set<String> getRole() {
-    	return this.role;
-    }
-    
-    public void setRole(Set<String> role) {
-    	this.role = role;
-    }
+   
 }

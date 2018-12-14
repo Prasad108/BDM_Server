@@ -34,22 +34,26 @@ public class BookController {
 	public List<Book> getAllBooks() {
 	return bookService.getall();
 	}
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public Book getBook(@PathVariable Integer id) {
 		return bookService.find(id);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.PUT,produces = "application/json")
 	public Book addBook(@RequestBody Book book) {
 		return bookService.create(book);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Book updateBook(@PathVariable Integer id,@RequestBody Book book) {
 		return bookService.update(book);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBook(@PathVariable Integer id) {
 		bookService.delet(id);

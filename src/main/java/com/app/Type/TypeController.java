@@ -3,6 +3,7 @@ package com.app.Type;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +27,19 @@ public class TypeController {
 		return typeService.find(id);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public Type addType(@RequestBody Type type) {
 		return typeService.create(type);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Type updateType(@PathVariable Integer id,@RequestBody Type type) {
 		return typeService.update(type);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletType(@PathVariable Integer id) {
 		typeService.delet(id);
