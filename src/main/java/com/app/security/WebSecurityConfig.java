@@ -15,10 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.app.User.UserService;
-import com.grokonez.jwtauthentication.security.jwt.JwtAuthEntryPoint;
-import com.grokonez.jwtauthentication.security.jwt.JwtAuthTokenFilter;
-import com.grokonez.jwtauthentication.security.services.UserDetailsServiceImpl;
- 
+import com.app.security.jwt.JwtAuthEntryPoint;
+import com.app.security.jwt.JwtAuthTokenFilter;
+import com.app.security.services.UserDetailsServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(userService)
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
  

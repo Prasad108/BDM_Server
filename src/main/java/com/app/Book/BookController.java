@@ -3,6 +3,7 @@ package com.app.Book;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class BookController {
 	public List<Book> getAllBooks() {
 	return bookService.getall();
 	}
-	
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Book getBook(@PathVariable Integer id) {
 		return bookService.find(id);
