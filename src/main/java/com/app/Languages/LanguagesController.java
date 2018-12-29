@@ -2,8 +2,9 @@ package com.app.Languages;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,19 +29,19 @@ public class LanguagesController {
 		return languagesService.find(id);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public void addLanguages(@RequestBody Languages languages) {
 		languagesService.create(languages);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public void updateLanguages(@PathVariable Integer id,@RequestBody Languages languages) {
 		languagesService.update(languages);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBook(@PathVariable Integer id) {
 		languagesService.delet(id);

@@ -2,8 +2,9 @@ package com.app.Book;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,24 +37,24 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	public Book getBook(@PathVariable Integer id) {
 		return bookService.find(id);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.PUT,produces = "application/json")
 	public Book addBook(@RequestBody Book book) {
 		return bookService.create(book);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Book updateBook(@PathVariable Integer id,@RequestBody Book book) {
 		return bookService.update(book);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBook(@PathVariable Integer id) {
 		bookService.delet(id);

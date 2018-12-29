@@ -34,7 +34,25 @@ public class Inventry implements java.io.Serializable {
 	private int quantity;
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Center.class)
 	@JsonIdentityReference(alwaysAsId=true)
-	private Set<Center> centers = new HashSet<Center>(0);
+	private Center center; 
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "center", nullable = false)
+	public Center getCenter() {
+		return center;
+	}
+
+	public void setCenter(Center center) {
+		this.center = center;
+	}
+
+	public Inventry(Integer id, Book book, int quantity, Center center) {
+		super();
+		this.id = id;
+		this.book = book;
+		this.quantity = quantity;
+		this.center = center;
+	}
 
 	public Inventry() {
 	}
@@ -42,12 +60,6 @@ public class Inventry implements java.io.Serializable {
 	public Inventry(Book book, int quantity) {
 		this.book = book;
 		this.quantity = quantity;
-	}
-
-	public Inventry(Book book, int quantity, Set<Center> centers) {
-		this.book = book;
-		this.quantity = quantity;
-		this.centers = centers;
 	}
 
 	@Id
@@ -79,15 +91,6 @@ public class Inventry implements java.io.Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventry")
-	public Set<Center> getCenters() {
-		return this.centers;
-	}
-
-	public void setCenters(Set<Center> centers) {
-		this.centers = centers;
 	}
 
 }

@@ -3,8 +3,9 @@ package com.app.CbDetails;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,19 +38,19 @@ public class CbDetailsController {
 		return cbDetailsService.find(id);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public CbDetails addCbDetails(@RequestBody CbDetails cbDetails) {
 		return cbDetailsService.create(cbDetails);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public void updateCbDetails(@PathVariable Integer id,@RequestBody CbDetails cbDetails) {
 		cbDetailsService.update(cbDetails);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletCbDetails(@PathVariable Integer id) {
 		cbDetailsService.delet(id);

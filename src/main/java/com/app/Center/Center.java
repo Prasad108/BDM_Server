@@ -31,31 +31,44 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Center implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Inventry.class)
-	@JsonIdentityReference(alwaysAsId=true)
-	private Inventry inventry;
 	private String name;
 	private String location;
 	private String pm;
 	private String pocDetails;
 	@JsonIgnore
 	private Set<User> users = new HashSet<User>(0);
+	
+	@JsonIgnore
+	private Set<Inventry> inventrys = new HashSet<Inventry>(0);
 
 	public Center() {
 	}
 
+	
 	public Center(String name) {
 		this.name = name;
 	}
 
-	public Center(Inventry inventry, String name, String location, String pm, String pocDetails, Set<User> users) {
-		this.inventry = inventry;
+	public Center(String name, String location, String pm, String pocDetails, Set<User> users) {
 		this.name = name;
 		this.location = location;
 		this.pm = pm;
 		this.pocDetails = pocDetails;
 		this.users = users;
 	}
+
+	public Center(Integer id, String name, String location, String pm, String pocDetails, Set<User> users,
+			Set<Inventry> inventorys) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.location = location;
+		this.pm = pm;
+		this.pocDetails = pocDetails;
+		this.users = users;
+		this.inventrys = inventorys;
+	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -67,16 +80,6 @@ public class Center implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "inventry")
-	public Inventry getInventry() {
-		return this.inventry;
-	}
-
-	public void setInventry(Inventry inventry) {
-		this.inventry = inventry;
 	}
 
 	@Column(name = "name", nullable = false, length = 200)
@@ -123,5 +126,21 @@ public class Center implements java.io.Serializable {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "center")
+	public Set<Inventry> getInventrys() {
+		return inventrys;
+	}
+
+	
+	public void setInventrys(Set<Inventry> inventrys) {
+		this.inventrys = inventrys;
+	}
+
+
+	
+	
+	
+	
 
 }

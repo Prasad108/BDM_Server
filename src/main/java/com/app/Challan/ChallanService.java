@@ -3,6 +3,7 @@ package com.app.Challan;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,20 @@ public class ChallanService  {
 		
 		
 		return rootNode.toString();
+	}
+	
+	public List<Challan> getChallanOfInstitute(){
+		
+		return null;
+	}
+
+	public Challan[] getAllOfUsersCenter(String name) {
+		// TODO Auto-generated method stub
+		return challanRepository.getAllChallanOfUsersCenter(name);
+	}
+	
+	public Challan[] justTry(String name) {
+		return challanRepository.justTry(name);
 	}
 
 }
