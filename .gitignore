@@ -24,4 +24,7 @@
 /nbdist/
 /.nb-gradle/
 
+/log/
 *.log
+*.gz
+

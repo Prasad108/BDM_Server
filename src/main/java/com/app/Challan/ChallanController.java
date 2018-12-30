@@ -2,6 +2,7 @@ package com.app.Challan;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.Book.BookService;
 import com.app.User.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 @RestController
 @RequestMapping("/challan") 
@@ -79,15 +81,8 @@ public class ChallanController {
 	
 	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/detailedChallnListForUsersCenter", method = RequestMethod.GET,produces = "application/json")
-	public Challan[] getDetailedChallanOfCenter(Principal principal,Authentication authentication) throws IOException {
-		System.out.println(principal.toString()+ " "+authentication.toString());
+	public ArrayNode getDetailedChallanOfCenter(Principal principal,Authentication authentication) throws IOException {
 		return challanService.getAllOfUsersCenter(principal.getName());
 	}
 
-	
-	@RequestMapping(value = "/just/try", method = RequestMethod.GET,produces = "application/json")
-	public Challan[] getJustTry(Principal principal,Authentication authentication) throws IOException {
-		System.out.println(principal.toString()+ " "+authentication.toString());
-		return challanService.justTry(principal.getName());
-	}
 }

@@ -2,6 +2,7 @@ package com.app.Challan;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +64,11 @@ public class ChallanService  {
 	
 	public String getDetailedChallan(int id) throws IOException {
 		Challan ch=find(id);
+		
+		return getChallanDetailsWithFullUserAndCbDetails(ch).toString();
+	}
+	
+	private JsonNode getChallanDetailsWithFullUserAndCbDetails(Challan ch) throws IOException {
 		JsonNode rootNode = mapper.valueToTree(ch);
 		((ObjectNode) rootNode).set("userByIssuedTo",mapper.valueToTree(userService.find(ch.getUserByIssuedTo().getId())));
 		((ObjectNode) rootNode).set("userByIssuedBy",mapper.valueToTree(userService.find(ch.getUserByIssuedBy().getId())));
@@ -74,9 +80,14 @@ public class ChallanService  {
 			//((ObjectNode) cbDetail).re
 		}
 		((ObjectNode) rootNode).replace("cbDetailses", cbDetailNodeArray);
-		
-		
-		return rootNode.toString();
+		return rootNode;
+	}
+	
+	private JsonNode getChallanDetailsWithFullUser(Challan ch) throws IOException {
+		JsonNode rootNode = mapper.valueToTree(ch);
+		((ObjectNode) rootNode).set("userByIssuedTo",mapper.valueToTree(userService.find(ch.getUserByIssuedTo().getId())));
+		((ObjectNode) rootNode).set("userByIssuedBy",mapper.valueToTree(userService.find(ch.getUserByIssuedBy().getId())));
+		return rootNode;
 	}
 	
 	public List<Challan> getChallanOfInstitute(){
@@ -84,9 +95,15 @@ public class ChallanService  {
 		return null;
 	}
 
-	public Challan[] getAllOfUsersCenter(String name) {
-		// TODO Auto-generated method stub
-		return challanRepository.getAllChallanOfUsersCenter(name);
+	public ArrayNode getAllOfUsersCenter(String name) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode challanArray = mapper.createArrayNode();
+		
+		for(Challan ch : challanRepository.getAllChallanOfUsersCenter(name)) {
+			challanArray.add(getChallanDetailsWithFullUser(ch));
+		}
+	
+		return challanArray;
 	}
 	
 	public Challan[] justTry(String name) {
