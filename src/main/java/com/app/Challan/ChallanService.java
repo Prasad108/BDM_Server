@@ -77,7 +77,6 @@ public class ChallanService  {
 			for(JsonNode cbDetail : readCbDetailsesNode) {
 			JsonNode  cb=	mapper.readTree(cbDetailsService.detaliedCbDetail(cbDetail.path("id").asInt()));
 			cbDetailNodeArray.add(cb);
-			//((ObjectNode) cbDetail).re
 		}
 		((ObjectNode) rootNode).replace("cbDetailses", cbDetailNodeArray);
 		return rootNode;
