@@ -44,6 +44,7 @@ public class User implements java.io.Serializable {
 	private String email;
 	private String mob;
 	private String username ;
+	@JsonIgnore
 	private String pwd;
 	@JsonIgnore
 	private Set<Challan> challansForIssuedTo = new HashSet<Challan>(0);
