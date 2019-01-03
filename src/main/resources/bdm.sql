@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `bdm` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `bdm`;
--- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: bdm
 -- ------------------------------------------------------
--- Server version	5.7.21
+-- Server version	5.7.21-log
+CREATE DATABASE  IF NOT EXISTS `bdm` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `bdm`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,14 +26,16 @@ DROP TABLE IF EXISTS `book`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL,
+  `name` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `lang` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type_FK_idx` (`type`),
   KEY `lang_FK_idx` (`lang`),
+  KEY `name_FK_idx` (`name`),
   CONSTRAINT `lang_FK` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `name_FK` FOREIGN KEY (`name`) REFERENCES `book_name` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `type_FK` FOREIGN KEY (`type`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -44,8 +46,33 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1),(2,'Bhagwat Gita English Pocket Soft Bound',100,1,5),(3,'Bhagwat Gita English Pocket Hard Bound',100,2,5),(4,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1),(5,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1),(6,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1),(7,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1),(8,'Bhagwat Gita Marathi Pocket Soft Bound',100,1,1);
+INSERT INTO `book` (`id`, `name`, `price`, `type`, `lang`) VALUES (1,1,100,1,1),(2,1,100,1,2),(3,1,100,2,5),(4,1,100,1,1),(5,1,100,1,1),(6,1,100,1,1),(7,1,100,1,1),(8,1,100,1,1);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `book_name`
+--
+
+DROP TABLE IF EXISTS `book_name`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `book_name` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `abbreviation` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `book_name`
+--
+
+LOCK TABLES `book_name` WRITE;
+/*!40000 ALTER TABLE `book_name` DISABLE KEYS */;
+INSERT INTO `book_name` (`id`, `name`, `abbreviation`) VALUES (1,'Bhagwat Gita','BG');
+/*!40000 ALTER TABLE `book_name` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -77,7 +104,7 @@ CREATE TABLE `cb_details` (
 
 LOCK TABLES `cb_details` WRITE;
 /*!40000 ALTER TABLE `cb_details` DISABLE KEYS */;
-INSERT INTO `cb_details` VALUES (1,1,1,100,10,NULL,1000),(2,1,2,80,8,NULL,0);
+INSERT INTO `cb_details` (`id`, `challan`, `book`, `rate`, `quantity`, `returned`, `sale_value`) VALUES (1,1,1,100,5,0000000002,300),(2,1,2,100,5,0000000000,500);
 /*!40000 ALTER TABLE `cb_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +131,7 @@ CREATE TABLE `center` (
 
 LOCK TABLES `center` WRITE;
 /*!40000 ALTER TABLE `center` DISABLE KEYS */;
-INSERT INTO `center` VALUES (1,'Atmanivedan Yoga','Hinjewadi','HG Varadraj Pr','Shivhsankar pr'),(2,'GGD','Vadgaon Bk','HG Amshu pr','Amit pr');
+INSERT INTO `center` (`id`, `name`, `location`, `PM`, `POC_Details`) VALUES (1,'Atmanivedan Yoga','Hinjewadi','HG Varadraj Pr','Shivhsankar pr'),(2,'GGD','Vadgaon Bk','HG Amshu pr','Amit pr');
 /*!40000 ALTER TABLE `center` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +167,7 @@ CREATE TABLE `challan` (
 
 LOCK TABLES `challan` WRITE;
 /*!40000 ALTER TABLE `challan` DISABLE KEYS */;
-INSERT INTO `challan` VALUES (1,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,1,1),(2,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,3,3),(3,NULL,NULL,'2008-10-03 22:59:52',NULL,0,NULL,NULL,1,1);
+INSERT INTO `challan` (`id`, `exp_amount`, `exp_comment`, `issued_date`, `received_amount`, `settled`, `settled_date`, `total_amount`, `issued_by`, `issued_to`) VALUES (1,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,1,1),(2,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,3,3),(3,NULL,NULL,'2008-10-03 22:59:52',NULL,1,NULL,NULL,1,1);
 /*!40000 ALTER TABLE `challan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +197,7 @@ CREATE TABLE `inventry` (
 
 LOCK TABLES `inventry` WRITE;
 /*!40000 ALTER TABLE `inventry` DISABLE KEYS */;
-INSERT INTO `inventry` VALUES (1,2,0000000004,1),(2,2,0000000500,1),(3,1,0000000600,1),(4,1,0000000600,1),(5,2,0000000400,1),(6,2,0000000400,1);
+INSERT INTO `inventry` (`id`, `book`, `quantity`, `center`) VALUES (1,2,0000000004,1),(2,2,0000000500,1),(3,1,0000000600,1),(4,1,0000000600,1),(5,2,0000000400,1),(6,2,0000000400,1);
 /*!40000 ALTER TABLE `inventry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,7 +221,7 @@ CREATE TABLE `languages` (
 
 LOCK TABLES `languages` WRITE;
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
-INSERT INTO `languages` VALUES (1,'Marathi'),(2,'Hindi'),(3,'Tamil'),(4,'Gujrati'),(5,'English'),(6,'update Kannad'),(7,'Kannad');
+INSERT INTO `languages` (`id`, `name`) VALUES (1,'Marathi'),(2,'Hindi'),(3,'Tamil'),(4,'Gujrati'),(5,'English'),(6,'update Kannad'),(7,'Kannad');
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +247,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (2,'ADMIN'),(1,'USER');
+INSERT INTO `roles` (`id`, `role`) VALUES (2,'ADMIN'),(1,'USER');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +271,7 @@ CREATE TABLE `type` (
 
 LOCK TABLES `type` WRITE;
 /*!40000 ALTER TABLE `type` DISABLE KEYS */;
-INSERT INTO `type` VALUES (1,'Pocket Size soft bound'),(2,'Pocket Size HArd bound');
+INSERT INTO `type` (`id`, `name`) VALUES (1,'Pocket Size soft bound'),(2,'Pocket Size HArd bound');
 /*!40000 ALTER TABLE `type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +308,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Mind','asfusersd1dsa@gmail.com','7894561230','user1','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',1,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1);
+INSERT INTO `user` (`id`, `counceller`, `email`, `mob`, `name`, `pwd`, `username`, `center`, `role`) VALUES (1,'Mind','asfusersd1dsa@gmail.com','7894561230','user1','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',1,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-29 20:54:51
+-- Dump completed on 2019-01-03 16:41:26
