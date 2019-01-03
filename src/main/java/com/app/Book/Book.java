@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.app.BookName.BookName;
 import com.app.CbDetails.CbDetails;
 import com.app.Inventry.Inventry;
 import com.app.Languages.Languages;
@@ -41,7 +42,9 @@ public class Book implements java.io.Serializable {
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Type.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private Type type;
-	private String name;
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = BookName.class)
+	@JsonIdentityReference(alwaysAsId=true)
+	private BookName name;
 	private int price;
 	@JsonIgnore
 	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
@@ -51,14 +54,14 @@ public class Book implements java.io.Serializable {
 	public Book() {
 	}
 
-	public Book(Languages languages, Type type, String name, int price) {
+	public Book(Languages languages, Type type, BookName name, int price) {
 		this.languages = languages;
 		this.type = type;
 		this.name = name;
 		this.price = price;
 	}
 
-	public Book(Languages languages, Type type, String name, int price, Set<CbDetails> cbDetailses,
+	public Book(Languages languages, Type type, BookName name, int price, Set<CbDetails> cbDetailses,
 			Set<Inventry> inventries) {
 		this.languages = languages;
 		this.type = type;
@@ -100,12 +103,13 @@ public class Book implements java.io.Serializable {
 		this.type = type;
 	}
 
-	@Column(name = "name", nullable = false, length = 200)
-	public String getName() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "name", nullable = false)
+	public BookName getName() {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(BookName name) {
 		this.name = name;
 	}
 

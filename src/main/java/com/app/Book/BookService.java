@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.BookName.BookNameService;
 import com.app.Languages.LanguagesService;
 import com.app.Type.TypeService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,6 +26,9 @@ public class BookService  {
 	
 	@Autowired
 	TypeService typeService;
+	
+	@Autowired
+	BookNameService bookNameService;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -53,8 +57,10 @@ public class BookService  {
 	public String getDetailedBook(int id) {
 		Book book= find(id);
 		JsonNode rootNode = mapper.valueToTree(book);
-		JsonNode lqngNode=mapper.valueToTree(languagesService.find(book.getLanguages().getId()));
-		((ObjectNode) rootNode).set("languages", lqngNode);
+		JsonNode nameNode=mapper.valueToTree(bookNameService.find(book.getName().getId()));
+		((ObjectNode) rootNode).set("name", nameNode);
+		JsonNode langNode=mapper.valueToTree(languagesService.find(book.getLanguages().getId()));
+		((ObjectNode) rootNode).set("languages", langNode);
 		JsonNode typeNode=mapper.valueToTree(typeService.find(book.getType().getId()));
 		((ObjectNode) rootNode).set("type", typeNode);
 		
