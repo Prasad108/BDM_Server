@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.Book.BookService;
+import com.app.Challan.ChallanRepository;
+import com.app.Challan.ChallanService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -22,6 +24,12 @@ public class CbDetailsService  {
 	
 	@Autowired
 	BookService bookService;
+	
+	@Autowired
+	ChallanRepository challanRepository;
+	
+	@Autowired
+	ChallanService challanService;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -51,7 +59,8 @@ public class CbDetailsService  {
 		CbDetails cb=find(id);
 		JsonNode rootNode = mapper.valueToTree(cb);
 		String b=bookService.getDetailedBook(cb.getBook().getId());
-		((ObjectNode) rootNode).set("book", mapper.readTree(b));			
+		((ObjectNode) rootNode).set("book", mapper.readTree(b));	
+		((ObjectNode) rootNode).set("challan",mapper.valueToTree(challanService.find(cb.getChallan().getId())));
 		return rootNode.toString();
 	}
 
