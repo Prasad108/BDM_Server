@@ -60,7 +60,6 @@ public class CbDetailsService  {
 		JsonNode rootNode = mapper.valueToTree(cb);
 		String b=bookService.getDetailedBook(cb.getBook().getId());
 		((ObjectNode) rootNode).set("book", mapper.readTree(b));	
-		((ObjectNode) rootNode).set("challan",mapper.valueToTree(challanService.find(cb.getChallan().getId())));
 		return rootNode.toString();
 	}
 
