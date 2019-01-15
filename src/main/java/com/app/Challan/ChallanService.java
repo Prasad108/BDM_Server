@@ -113,7 +113,7 @@ public class ChallanService  {
 		  ObjectMapper mapper = new ObjectMapper(); 
 		  ArrayNode challanArray = mapper.createArrayNode();
 		  System.out.println("name----"+name);
-		  for(Challan ch : challanRepository.getListOfUserSpecificChallan())
+		  for(Challan ch : challanRepository.getListOfUserSpecificChallan(name))
 		  {	  
 			  System.out.println("ch----"+ch.getId());
 			  challanArray.add(getChallanDetailsWithFullUser(ch));
