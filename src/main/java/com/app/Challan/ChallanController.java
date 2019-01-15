@@ -84,5 +84,12 @@ public class ChallanController {
 	public ArrayNode getDetailedChallanOfCenter(Principal principal,Authentication authentication) throws IOException {
 		return challanService.getAllOfUsersCenter(principal.getName());
 	}
+	
+	@RequestMapping(value="/userSpecificChallanList", method=RequestMethod.GET, produces="application/json")
+	public ArrayNode getUserSpecificChallanList(Principal principal, Authentication authentication) throws IOException
+	{
+		return challanService.getUserSpecificChallanList(principal.getName());
+		
+	}
 
 }

@@ -108,5 +108,18 @@ public class ChallanService  {
 	public Challan[] justTry(String name) {
 		return challanRepository.justTry(name);
 	}
+	
+	public ArrayNode getUserSpecificChallanList(String name) throws IOException {
+		  ObjectMapper mapper = new ObjectMapper(); 
+		  ArrayNode challanArray = mapper.createArrayNode();
+		  System.out.println("name----"+name);
+		  for(Challan ch : challanRepository.getListOfUserSpecificChallan())
+		  {	  
+			  System.out.println("ch----"+ch.getId());
+			  challanArray.add(getChallanDetailsWithFullUser(ch));
+		  }
+		  System.out.println("---------"+challanArray.asText());
+		  return challanArray;
+	}
 
 }
