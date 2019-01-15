@@ -1,5 +1,6 @@
 package com.app.User;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -45,6 +46,10 @@ public class UserController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletUser(@PathVariable Integer id) {
 		userService.delet(id);
+	}
+	@RequestMapping(value = "/allUserOfcurrentUsersCenter", method = RequestMethod.GET)
+	public List<User> allUserOfcurrentUsersCenter(Principal principal) {
+		return userService.allUserOfcurrentUsersCenter(principal.getName());
 	}
 
 }

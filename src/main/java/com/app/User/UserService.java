@@ -36,6 +36,10 @@ public class UserService  {
 		return list;
 	}
 	
+	public List<User> allUserOfcurrentUsersCenter(String username){
+		return userRepository.allUserOfcurrentUsersCenter(username);
+	}
+	
 	
 
 }
