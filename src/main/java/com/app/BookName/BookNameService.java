@@ -7,12 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 @Service
 @Transactional
 public class BookNameService  {
 
 	@Autowired
 	BookNameRepository bookNameRepository;
+	
+	ObjectMapper mapper = new ObjectMapper();
 	
 	public BookName create(BookName bookName) {
 		return bookNameRepository.save(bookName);
@@ -30,10 +37,23 @@ public class BookNameService  {
 		return bookNameRepository.findById(id).get();
 	}
 
-	public List<BookName> getall() {
+	private JsonNode getBookName(BookName bookName)
+	{
+		JsonNode rootNode = mapper.valueToTree(bookName);
+		((ObjectNode) rootNode).set("name",mapper.valueToTree(bookName.getName()));
+		return rootNode;
+	}
+	
+	public ArrayNode getall() {
 		List<BookName> list = new ArrayList<>();
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode bookArray = mapper.createArrayNode();
 		bookNameRepository.findAll().forEach(list::add);
-		return list;
+		for(BookName name:list)
+		{
+			bookArray.add(getBookName(name));
+		}
+		return bookArray;
 	}
 
 }

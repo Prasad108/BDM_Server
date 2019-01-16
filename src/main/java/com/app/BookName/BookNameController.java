@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 @RestController
 @RequestMapping("/bookName") 
 public class BookNameController {
@@ -19,7 +21,7 @@ public class BookNameController {
 	BookNameService bookNameService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<BookName> getAllBookNames() {
+	public ArrayNode getAllBookNames() {
 	return bookNameService.getall();
 	}
 	

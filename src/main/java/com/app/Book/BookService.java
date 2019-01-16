@@ -51,6 +51,10 @@ public class BookService  {
 	public List<Book> getall() {
 		List<Book> list = new ArrayList<>();
 		bookRepository.findAll().forEach(list::add);
+		for(Book book:list)
+		{
+			System.out.println(book.getName().getName());
+		}
 		return list;
 	}
 	
