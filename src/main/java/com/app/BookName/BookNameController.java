@@ -1,5 +1,6 @@
 package com.app.BookName;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -46,6 +47,13 @@ public class BookNameController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletBookName(@PathVariable Integer id) {
 		bookNameService.delet(id);
+	}
+	
+	
+	
+	@RequestMapping(value = "/getAllBookNameOfUsersInventory", method = RequestMethod.GET,produces = "application/json")
+	public List<BookName> getAllBookNameOfUsersInventory(Principal principal) {
+		return bookNameService.getAllBookNameOfUsersInventory(principal.getName());
 	}
 
 }

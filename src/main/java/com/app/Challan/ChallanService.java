@@ -1,16 +1,20 @@
 package com.app.Challan;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.CbDetails.CbDetailsService;
+import com.app.User.User;
+import com.app.User.UserRepository;
 import com.app.User.UserService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +31,9 @@ public class ChallanService  {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	CbDetailsService cbDetailsService;
@@ -120,6 +127,20 @@ public class ChallanService  {
 		  }
 		  System.out.println("---------"+challanArray.asText());
 		  return challanArray;
+	}
+	
+	public Challan creatNewChallan(Integer id,Principal principal) {
+		Challan challan= new Challan();
+		User issuedBy = userRepository.findByUsername(principal.getName()).orElseThrow(() -> 
+						new UsernameNotFoundException("User Not Found with -> username : " + principal.getName()));
+		challan.setUserByIssuedBy(issuedBy);
+		User issuedTo = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Requested issued_To user not Present!"));
+		challan.setUserByIssuedTo(issuedTo);
+		challan.setIssuedDate(new Date());
+		challan.setSettled((byte)0);
+		challan.setTotalAmount(0);
+		// challan.setReceivedAmount(0);
+		return challanRepository.save(challan);
 	}
 
 }

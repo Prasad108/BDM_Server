@@ -36,4 +36,10 @@ public class LanguagesService  {
 		return list;
 	}
 
+	public List<Languages> getAllLanguagesForBookNameInUsersInventory(Integer bookId,String userName) {
+		
+		return languagesRepository.getAllBookNameOfUsersInventory(bookId, userName).orElseThrow(() ->
+		new RuntimeException("Error in findin users Bookname List -> username : " + userName));
+	}
+
 }

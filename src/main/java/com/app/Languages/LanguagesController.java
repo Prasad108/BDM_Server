@@ -1,5 +1,6 @@
 package com.app.Languages;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -46,5 +47,12 @@ public class LanguagesController {
 	public void deletBook(@PathVariable Integer id) {
 		languagesService.delet(id);
 	}
+	
+	@RequestMapping(value = "/getAllLanguagesForBookNameInUsersInventory/{id}", method = RequestMethod.GET)
+	public List<Languages> getAllLanguagesForBookNameInUsersInventory(@PathVariable Integer id,Principal principal) {
+		return languagesService.getAllLanguagesForBookNameInUsersInventory(id, principal.getName());
+	}
+	
+	
 
 }

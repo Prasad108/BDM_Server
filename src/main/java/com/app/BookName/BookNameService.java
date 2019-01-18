@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +55,12 @@ public class BookNameService  {
 			bookArray.add(getBookName(name));
 		}
 		return bookArray;
+	}
+	
+	public List<BookName> getAllBookNameOfUsersInventory(String userName) {
+		List<BookName> list = bookNameRepository.getAllBookNameOfUsersInventory(userName).orElseThrow(() -> 
+		  new RuntimeException("Error in findin users Bookname List -> username : " + userName));
+		return list;
 	}
 
 }

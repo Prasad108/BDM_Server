@@ -91,5 +91,11 @@ public class ChallanController {
 		return challanService.getUserSpecificChallanList(principal.getName());
 		
 	}
+	
+	@RolesAllowed("ROLE_ADMIN")
+	@RequestMapping(value = "/new/{id}", method = RequestMethod.POST,produces = "application/json")
+	public Challan createChallan(@PathVariable Integer id,Principal principal) {
+		return challanService.creatNewChallan(id,principal);
+	}
 
 }
