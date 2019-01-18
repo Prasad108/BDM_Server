@@ -1,5 +1,6 @@
 package com.app.Type;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -44,6 +45,12 @@ public class TypeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
 	public void deletType(@PathVariable Integer id) {
 		typeService.delet(id);
+	}
+	
+	
+	@RequestMapping(value = "/getAllTypesForBookNameAndLanguageInUsersInventory/{nameId}/{langId}", method = RequestMethod.GET)
+	public List<Type> getAllTypesForBookNameAndLanguageInUsersInventory(@PathVariable Integer nameId, @PathVariable Integer langId, Principal principal) {
+		return typeService.getAllTypesForBookNameAndLanguageInUsersInventory(nameId,langId,principal.getName());
 	}
 
 }

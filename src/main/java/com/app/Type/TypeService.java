@@ -36,4 +36,9 @@ public class TypeService  {
 		return list;
 	}
 
+	public List<Type> getAllTypesForBookNameAndLanguageInUsersInventory(Integer nameId, Integer langId, String name) {
+		return typeRepository.getAllTypesForBookNameAndLanguageInUsersInventory(nameId,langId,name);
+	
+	}
+
 }
