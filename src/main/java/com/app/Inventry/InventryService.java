@@ -2,10 +2,15 @@ package com.app.Inventry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.app.BookName.BookName;
+import com.app.Languages.Languages;
+import com.app.Type.Type;
 
 @Service
 @Transactional
@@ -35,5 +40,10 @@ public class InventryService  {
 		inventryRepository.findAll().forEach(list::add);
 		return list;
 	}
+	
+
+	public Optional<List<Object[]>> findByUserCenterLangNameandType(BookName bn, Languages l, Type t, String username) {
+		return inventryRepository.findByUserCenterLangNameandType(bn,l,t,username);
+	};
 
 }

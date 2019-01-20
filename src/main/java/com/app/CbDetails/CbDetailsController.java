@@ -1,6 +1,7 @@
 package com.app.CbDetails;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -24,6 +25,7 @@ public class CbDetailsController {
 	
 	@Autowired
 	BookService bookService;
+	
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -61,6 +63,10 @@ public class CbDetailsController {
 		return cbDetailsService.detaliedCbDetail(id);
 	}
 	
-	
+	@RequestMapping(value = "/getCbDetailFromChallanWithRequestedNameLangType/{challan}/{name}/{lang}/{type}", method = RequestMethod.GET,produces = "application/json")
+	public String getCbDetailFromChallanWithRequestedNameLangType(@PathVariable Integer challan,
+			@PathVariable Integer name,@PathVariable Integer lang,@PathVariable Integer type,Principal principal) throws IOException {
+		return cbDetailsService.getCbDetailFromChallanWithRequestedNameLangType(challan,name,lang,type,principal.getName());
+	}
 
 }
