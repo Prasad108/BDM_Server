@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.Languages.Languages;
+import com.app.Languages.LanguagesService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -19,6 +21,9 @@ public class BookNameService  {
 
 	@Autowired
 	BookNameRepository bookNameRepository;
+	
+	@Autowired
+	LanguagesService languagesService;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -62,5 +67,12 @@ public class BookNameService  {
 		  new RuntimeException("Error in findin users Bookname List -> username : " + userName));
 		return list;
 	}
+	
+	public List<Languages> getBookById(Integer id,String name) {
+		
+		return languagesService.getAllLanguagesForBookNameInUsersInventory(id, name);
+	
+	}
+
 
 }

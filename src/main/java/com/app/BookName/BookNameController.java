@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.Book.BookService;
+import com.app.Languages.Languages;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 @RestController
@@ -21,15 +23,18 @@ public class BookNameController {
 	@Autowired
 	BookNameService bookNameService;
 	
+	@Autowired
+	BookService bookService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ArrayNode getAllBookNames() {
 	return bookNameService.getall();
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public BookName getBookName(@PathVariable Integer id) {
-		return bookNameService.find(id);
-	}
+	
+	  @RequestMapping(value = "/{id}", method = RequestMethod.GET) public BookName
+	  getBookName(@PathVariable Integer id) { return bookNameService.find(id); }
+	 
 	
 	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
@@ -54,6 +59,11 @@ public class BookNameController {
 	@RequestMapping(value = "/getAllBookNameOfUsersInventory", method = RequestMethod.GET,produces = "application/json")
 	public List<BookName> getAllBookNameOfUsersInventory(Principal principal) {
 		return bookNameService.getAllBookNameOfUsersInventory(principal.getName());
+	}
+	
+	@RequestMapping(value="/getbook/{id}", method=RequestMethod.GET,produces = "application/json")
+	public List<Languages> getBookByBookId(@PathVariable Integer id,Principal principal){
+		return bookNameService.getBookById(id,principal.getName());
 	}
 
 }
