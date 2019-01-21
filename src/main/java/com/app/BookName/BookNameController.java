@@ -65,5 +65,10 @@ public class BookNameController {
 	public List<Languages> getBookByBookId(@PathVariable Integer id,Principal principal){
 		return bookNameService.getBookById(id,principal.getName());
 	}
+	
+	@RequestMapping(value = "/getBooNameOfAllBooks", method = RequestMethod.GET,produces = "application/json")
+	public List<BookName> getBooNameOfAllBooks() {
+		return bookNameService.getBooNameOfAllBooks();
+	}
 
 }

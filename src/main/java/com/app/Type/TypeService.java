@@ -41,4 +41,10 @@ public class TypeService  {
 	
 	}
 
+	public List<Type> getAllTypesForBookNameAndLanguageFromAllBooks(Integer nameId, Integer langId) {
+		// TODO Auto-generated method stub
+		return typeRepository.getAllTypesForBookNameAndLanguageFromAllBooks(nameId, langId)
+				.orElseThrow(() -> new RuntimeException("Error While Fetching all Book Language"));
+	}
+
 }

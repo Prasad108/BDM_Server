@@ -52,5 +52,10 @@ public class TypeController {
 	public List<Type> getAllTypesForBookNameAndLanguageInUsersInventory(@PathVariable Integer nameId, @PathVariable Integer langId, Principal principal) {
 		return typeService.getAllTypesForBookNameAndLanguageInUsersInventory(nameId,langId,principal.getName());
 	}
+	
+	@RequestMapping(value = "/getAllTypesForBookNameAndLanguageFromAllBooks/{nameId}/{langId}", method = RequestMethod.GET)
+	public List<Type> getAllTypesForBookNameAndLanguageFromAllBooks(@PathVariable Integer nameId, @PathVariable Integer langId, Principal principal) {
+		return typeService.getAllTypesForBookNameAndLanguageFromAllBooks(nameId,langId);
+	}
 
 }

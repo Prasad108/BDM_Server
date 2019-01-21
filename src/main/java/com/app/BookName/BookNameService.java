@@ -74,5 +74,11 @@ public class BookNameService  {
 	
 	}
 
+	public List<BookName> getBooNameOfAllBooks() {
+		
+		return bookNameRepository.getBooNameOfAllBooks()
+				.orElseThrow(() -> new RuntimeException("Error While Fetching all Book Names"));
+	}
+
 
 }

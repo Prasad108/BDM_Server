@@ -42,4 +42,9 @@ public class LanguagesService  {
 		new RuntimeException("Error in findin users Bookname List -> username : " + userName));
 	}
 
+	public List<Languages> getLanguagesOfAllBooksHavingBookName(Integer id) {
+		return languagesRepository.getLanguagesOfAllBooksHavingBookName(id)
+				.orElseThrow(() -> new RuntimeException("Error While Fetching all Book Language"));
+	}
+
 }

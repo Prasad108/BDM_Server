@@ -54,5 +54,11 @@ public class LanguagesController {
 	}
 	
 	
+	@RequestMapping(value = "/getLanguagesOfAllBooksHavingBookName/{id}", method = RequestMethod.GET)
+	public List<Languages> getLanguagesOfAllBooksHavingBookName(@PathVariable Integer id) {
+		return languagesService.getLanguagesOfAllBooksHavingBookName(id);
+	}
+	
+	
 
 }
