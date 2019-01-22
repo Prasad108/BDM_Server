@@ -247,7 +247,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `role`) VALUES (2,'ADMIN'),(1,'USER');
+INSERT INTO `roles` (`id`, `role`) VALUES (2,'ADMIN'),(1,'USER'),(3,'SUPERADMIN');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +308,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `counceller`, `email`, `mob`, `name`, `pwd`, `username`, `center`, `role`) VALUES (1,'Mind','asfusersd1dsa@gmail.com','7894561230','user1','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',2,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1),(4,'zyx','user@gmail.com','7894561230','user','$2a$10$DNRc0CLoBUllFzMIdREGzOaseVilSaGWkrei5D3VTbKGHKvmIJFxa','user',1,1),(5,'abcd','admin@gmail.com','7894561230','admin','$2a$10$2zkhh0gXvcPPtzkmqDNiAuW98s/j7Rc/G2kKq4OK4bL6V6CavbmaW','admin',1,2);
+INSERT INTO `user` (`id`, `counceller`, `email`, `mob`, `name`, `pwd`, `username`, `center`, `role`) VALUES (1,'Mind','asfusersd1dsa@gmail.com','7894561230','user1','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',2,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1),(4,'zyx','user@gmail.com','7894561230','user','$2a$10$DNRc0CLoBUllFzMIdREGzOaseVilSaGWkrei5D3VTbKGHKvmIJFxa','user',1,1),(5,'abcd','admin@gmail.com','7894561230','admin','$2a$10$2zkhh0gXvcPPtzkmqDNiAuW98s/j7Rc/G2kKq4OK4bL6V6CavbmaW','admin',1,2),(6,'Mind','asfusersd1ds1a@gmail.com','7894561230','superadmin','$2a$10$zAKzzlwt8SvRaxB5tQj4m.1QUl1r1VfgwbDqq1JHlKCjghLUxdeyG','superadmin',1,3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
