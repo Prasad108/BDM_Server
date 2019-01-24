@@ -142,5 +142,9 @@ public class ChallanService  {
 		// challan.setReceivedAmount(0);
 		return challanRepository.save(challan);
 	}
+	
+	public boolean checkIfChallanIsSettled(Integer id) {
+		return challanRepository.checkIfChallanIsSettled(id).isPresent();
+	}
 
 }

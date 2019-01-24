@@ -1,6 +1,7 @@
 package com.app.Challan;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,4 +19,7 @@ public interface ChallanRepository extends CrudRepository<Challan, Integer> {
 
 	@Query("SELECT ch FROM Challan ch WHERE ch.userByIssuedTo in (SELECT u.id FROM User u where u.username=:username)")
 	public Challan[] getListOfUserSpecificChallan(@Param("username") String username);
+	
+	@Query("SELECT ch FROM Challan ch WHERE ch.id = :id and ch.settled = 1")
+	public Optional<Challan> checkIfChallanIsSettled(@Param("id") Integer id);
 }

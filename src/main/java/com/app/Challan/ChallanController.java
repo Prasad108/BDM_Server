@@ -97,5 +97,13 @@ public class ChallanController {
 	public Challan createChallan(@PathVariable Integer id,Principal principal) {
 		return challanService.creatNewChallan(id,principal);
 	}
+	
+	
+	@RequestMapping(value="/checkIfChallanIsSettled/{id}", method=RequestMethod.GET, produces="application/json")
+	public boolean checkIfChallanIsSettled(@PathVariable Integer id)
+	{
+		return challanService.checkIfChallanIsSettled(id);
+		
+	}
 
 }
