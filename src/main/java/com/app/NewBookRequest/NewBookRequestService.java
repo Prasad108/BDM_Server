@@ -33,7 +33,7 @@ public class NewBookRequestService {
 		requestRepo.deleteById(id);
 	}
 	
-	public NewBookRequest find(Integer id)
+	public NewBookRequest findById(Integer id)
 	{
 		return requestRepo.findById(id).get();
 	}
@@ -42,6 +42,13 @@ public class NewBookRequestService {
 	{
 		List<NewBookRequest> requests=new ArrayList<NewBookRequest>();
 		requestRepo.findAll().forEach(requests::add);
+		return requests;
+	}
+
+	public List<NewBookRequest> getRequestListByUser(String name) {
+		
+		List<NewBookRequest> requests=new ArrayList<NewBookRequest>();
+		requestRepo.getNewBookRequestsByUser(name);
 		return requests;
 	}
 }

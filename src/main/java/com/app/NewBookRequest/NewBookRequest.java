@@ -14,8 +14,8 @@ public class NewBookRequest {
 	
 	private Integer id;
 	private String bookName;
-	private String bLang;
-	private String type;
+	private String language;
+	private String bookType;
 	private Integer price;
 	private String abbrivation;
 	private String user;
@@ -29,7 +29,6 @@ public class NewBookRequest {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
@@ -51,23 +50,23 @@ public class NewBookRequest {
 	}
 
 	@Column(name = "BLang", nullable = false)
-	public String getbLang() {
-		return bLang;
+	public String getLanguage() {
+		return language;
 	}
 
 
-	public void setbLang(String bLang) {
-		this.bLang = bLang;
+	public void setLanguage(String bLang) {
+		this.language = bLang;
 	}
 
 	@Column(name = "Btype", nullable = false)
-	public String getType() {
-		return type;
+	public String getBookType() {
+		return bookType;
 	}
 
 
-	public void setType(String type) {
-		this.type = type;
+	public void setBookType(String bookType) {
+		this.bookType = bookType;
 	}
 
 	@Column(name = "price", nullable = false)
@@ -122,7 +121,7 @@ public class NewBookRequest {
 
 	@Override
 	public String toString() {
-		return "NewBookRequest [id=" + id + ", bookName=" + bookName + ", bLang=" + bLang + ", type=" + type
+		return "NewBookRequest [id=" + id + ", bookName=" + bookName + ", bLang=" + language + ", type=" + bookType
 				+ ", price=" + price + ", abbrivation=" + abbrivation + ", user=" + user + ", remark=" + remark
 				+ ", status=" + status + "]";
 	}
