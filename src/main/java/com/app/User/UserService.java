@@ -39,6 +39,10 @@ public class UserService  {
 	public List<User> allUserOfcurrentUsersCenter(String username){
 		return userRepository.allUserOfcurrentUsersCenter(username);
 	}
+
+	public List<User> getUsersOfCenterByCenterId(Integer id) {
+		return userRepository.getUsersOfCenterByCenterId(id);
+	}
 	
 	
 

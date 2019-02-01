@@ -51,5 +51,11 @@ public class UserController {
 	public List<User> allUserOfcurrentUsersCenter(Principal principal) {
 		return userService.allUserOfcurrentUsersCenter(principal.getName());
 	}
+	
+	
+	@RequestMapping(value = "/getUsersOfCenterByCenterId/{id}", method = RequestMethod.GET)
+	public List<User> getUsersOfCenterByCenterId(@PathVariable Integer id) {
+		return userService.getUsersOfCenterByCenterId(id);
+	}
 
 }

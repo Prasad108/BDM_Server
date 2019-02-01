@@ -15,5 +15,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     
     @Query(" SELECT u FROM User u WHERE u.center in ( SELECT c.id from User u, Center c WHERE u.center=c.id and u.username= :username )")
 	public List<User> allUserOfcurrentUsersCenter(@Param("username") String username);
+    
+    @Query(" SELECT u FROM User u WHERE u.center.id = :id")
+   	public List<User> getUsersOfCenterByCenterId(@Param("id") Integer id);
 
 }
