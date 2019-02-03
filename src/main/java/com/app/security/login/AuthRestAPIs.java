@@ -72,23 +72,23 @@ public class AuthRestAPIs {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 		if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return new ResponseEntity<String>("Fail -> Username is already taken!",
+			return new ResponseEntity<String>("Username is already taken!",
 					HttpStatus.BAD_REQUEST);
 		}
 
 		if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return new ResponseEntity<String>("Fail -> Email is already in use!",
+			return new ResponseEntity<String>("Email is already in use!",
 					HttpStatus.BAD_REQUEST);
 		}
 		
-		Roles userRole=roleRepository.findById(signUpRequest.getRole()).get();
+		Roles userRole=roleRepository.findById(signUpRequest.getRoles()).get();
 		Center center = centerService.find(signUpRequest.getCenter());
 		// Creating user's account
 		User user = new User(center, userRole, signUpRequest.getName(), signUpRequest.getCounceller(), signUpRequest.getEmail(), signUpRequest.getMob(), signUpRequest.getUsername(),  encoder.encode(signUpRequest.getPassword()), null, null);
 		userRepository.save(user);
 
-		return ResponseEntity.ok().body("User registered successfully!");
+		return ResponseEntity.ok(signUpRequest);
 	}
 }

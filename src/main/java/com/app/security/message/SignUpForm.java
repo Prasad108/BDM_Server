@@ -9,7 +9,7 @@ public class SignUpForm {
     @Size(min = 3, max = 50)
     private String name;
  
-    @NotBlank
+    @NotBlank	
     @Size(min = 3, max = 50)
     private String username;
  
@@ -18,7 +18,7 @@ public class SignUpForm {
     @Email
     private String email;
     
-    private int role;
+    private int roles;
     
     @NotBlank
     @Size(min = 6, max = 40)
@@ -90,13 +90,15 @@ public class SignUpForm {
         this.password = password;
     }
 
-	public int getRole() {
-		return role;
+	public int getRoles() {
+		return roles;
 	}
 
-	public void setRole(int role) {
-		this.role = role;
+	public void setRoles(int roles) {
+		this.roles = roles;
 	}
+
+	
     
    
 }
