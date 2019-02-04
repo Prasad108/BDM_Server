@@ -35,7 +35,7 @@ public class Challan implements java.io.Serializable {
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = User.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private User userByIssuedTo;
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = User.class)
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Challan.class)
 	@JsonIdentityReference(alwaysAsId=true)
 	private User userByIssuedBy;
 	private Date issuedDate;
