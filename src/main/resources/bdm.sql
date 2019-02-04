@@ -117,16 +117,30 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER updateChallanTotalOnCbDetailsInsert
+DROP TRIGGER IF EXISTS updateChallanTotalAndInventoryOnCbDetailsInsert;;
+/*!50003 CREATE*/  /*!50003 TRIGGER updateChallanTotalAndInventoryOnCbDetailsInsert
     AFTER INSERT ON `bdm`.`cb_details`
     FOR EACH ROW
 
 BEGIN
 
+	DECLARE inventoryIdToUpdate INT;
+
+  	SELECT DISTINCT i.id into @inventoryIdToUpdate  FROM 
+	cb_details cb, challan ch, book b, center c, inventry i, user u 
+	WHERE 
+	cb.challan= ch.id  AND
+	ch.issued_by =u.id AND
+	cb.book = b.id AND
+	i.book =b.id AND
+	i.center =c.id AND
+	cb.id=NEW.id;    
+    
+	UPDATE inventry set quantity =quantity - NEW.quantity where id=@inventoryIdToUpdate;
+   
    call bdm.calculateChallanTotal(NEW.challan);
 
 END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -140,11 +154,25 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER updateChallanTotalOnCbDetailsUpdate
+DROP TRIGGER IF EXISTS updateChallanTotalAndInventoryOnCbDetailsUpdate;;
+/*!50003 CREATE*/  /*!50003 TRIGGER updateChallanTotalAndInventoryOnCbDetailsUpdate
     AFTER UPDATE ON `bdm`.`cb_details`
     FOR EACH ROW
 
 BEGIN
+	DECLARE inventoryIdToUpdate INT;
+
+  	SELECT DISTINCT i.id into @inventoryIdToUpdate  FROM 
+	cb_details cb, challan ch, book b, center c, inventry i, user u 
+	WHERE 
+	cb.challan= ch.id  AND
+	ch.issued_by =u.id AND
+	cb.book = b.id AND
+	i.book =b.id AND
+	i.center =c.id AND
+	cb.id=NEW.id;   
+    
+    UPDATE inventry set quantity = quantity - ( cast((NEW.quantity - NEW.returned) as signed) - cast((OLD.quantity - OLD.returned)as signed) ) where id=@inventoryIdToUpdate;
 
    call bdm.calculateChallanTotal(NEW.challan);
 
@@ -268,9 +296,10 @@ CREATE TABLE `inventry` (
 
 LOCK TABLES `inventry` WRITE;
 /*!40000 ALTER TABLE `inventry` DISABLE KEYS */;
-INSERT INTO `inventry` (`id`, `book`, `quantity`, `center`) VALUES (1,2,0000000004,1),(2,2,0000000500,1),(3,1,0000000600,1),(4,1,0000000600,1),(5,2,0000000400,1),(6,2,0000000400,1),(7,3,0000000020,1),(8,4,0000000010,2),(9,4,0000000005,1);
+INSERT INTO `inventry` (`id`, `book`, `quantity`, `center`) VALUES (1,2,0000000102,1),(3,1,0000000545,1),(7,3,0000000020,1),(9,4,0000000005,1);
 /*!40000 ALTER TABLE `inventry` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `languages`
