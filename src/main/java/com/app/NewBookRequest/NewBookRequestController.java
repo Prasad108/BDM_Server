@@ -44,4 +44,9 @@ public class NewBookRequestController {
 	{
 		return service.findById(id);
 	}
+	
+	@RequestMapping(value="/confirmRequest/",method=RequestMethod.PUT)
+	public void updateRequest(@RequestBody NewBookRequest request) {
+		service.updateById(request.getId(), request.getStatus().toLowerCase(), request.getRemark());
+	}
 }

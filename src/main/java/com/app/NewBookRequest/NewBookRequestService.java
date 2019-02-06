@@ -51,5 +51,10 @@ public class NewBookRequestService {
 		requestRepo.getNewBookRequestsByUser(name);
 		return requests;
 	}
+	
+	public void updateById(int id,String status,String remark)
+	{
+		requestRepo.updateRequestById(id, status, remark);
+	}
 }
 
