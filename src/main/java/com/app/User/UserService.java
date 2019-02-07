@@ -7,12 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.Role.Roles;
+import com.app.Role.RolesRepository;
+import com.app.security.message.SignUpForm;
+
 @Service
 @Transactional
 public class UserService  {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	RolesRepository rolesRepository;
 	
 	public void create(User user) {
 		userRepository.save(user);
@@ -46,6 +53,16 @@ public class UserService  {
 
 	public User getCurrentUserDetails(String name) {
 		return userRepository.findByUsername(name).get();
+	}
+
+	public void update(SignUpForm signUpRequest, Integer id) {
+		Roles userRole= rolesRepository.findById(signUpRequest.getRoles()).get();
+		userRepository.updateUser(id,
+				signUpRequest.getName(),
+				signUpRequest.getEmail(),
+				signUpRequest.getMob(),
+				userRole,
+				signUpRequest.getCounceller());
 	}
 	
 	

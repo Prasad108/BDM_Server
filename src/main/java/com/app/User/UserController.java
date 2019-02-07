@@ -4,13 +4,21 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.app.Center.Center;
+import com.app.Role.Roles;
+import com.app.security.message.SignUpForm;
 
 @RestController
 @RequestMapping("/user") 
@@ -62,6 +70,13 @@ public class UserController {
 	@RequestMapping(value = "/getCurrentUserDetails", method = RequestMethod.GET)
 	public User getCurrentUserDetails(Principal principal) {
 		return userService.getCurrentUserDetails(principal.getName());
+	}
+	
+	@RolesAllowed("ROLE_ADMIN")
+	@PostMapping("/update/{id}")
+	public ResponseEntity<?> registerUser(@RequestBody SignUpForm signUpRequest,@PathVariable Integer id) {
+		userService.update(signUpRequest,id);
+		return ResponseEntity.ok(signUpRequest);
 	}
 
 }
