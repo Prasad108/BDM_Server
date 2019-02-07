@@ -47,6 +47,7 @@ public class UserController {
 	public void deletUser(@PathVariable Integer id) {
 		userService.delet(id);
 	}
+	
 	@RequestMapping(value = "/allUserOfcurrentUsersCenter", method = RequestMethod.GET)
 	public List<User> allUserOfcurrentUsersCenter(Principal principal) {
 		return userService.allUserOfcurrentUsersCenter(principal.getName());
@@ -56,6 +57,11 @@ public class UserController {
 	@RequestMapping(value = "/getUsersOfCenterByCenterId/{id}", method = RequestMethod.GET)
 	public List<User> getUsersOfCenterByCenterId(@PathVariable Integer id) {
 		return userService.getUsersOfCenterByCenterId(id);
+	}
+	
+	@RequestMapping(value = "/getCurrentUserDetails", method = RequestMethod.GET)
+	public User getCurrentUserDetails(Principal principal) {
+		return userService.getCurrentUserDetails(principal.getName());
 	}
 
 }

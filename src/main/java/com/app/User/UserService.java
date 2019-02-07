@@ -43,6 +43,10 @@ public class UserService  {
 	public List<User> getUsersOfCenterByCenterId(Integer id) {
 		return userRepository.getUsersOfCenterByCenterId(id);
 	}
+
+	public User getCurrentUserDetails(String name) {
+		return userRepository.findByUsername(name).get();
+	}
 	
 	
 
