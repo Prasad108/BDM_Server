@@ -48,7 +48,7 @@ public class NewBookRequestService {
 	public List<NewBookRequest> getRequestListByUser(String name) {
 		
 		List<NewBookRequest> requests=new ArrayList<NewBookRequest>();
-		requestRepo.getNewBookRequestsByUser(name);
+		requests=requestRepo.getNewBookRequestsByUser(name);
 		return requests;
 	}
 	
