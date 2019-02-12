@@ -14,8 +14,8 @@ public class LanguagesService  {
 	@Autowired
 	LanguagesRepository languagesRepository;
 	
-	public void create(Languages languages) {
-		languagesRepository.save(languages);
+	public Languages create(Languages languages) {
+		return languagesRepository.save(languages);
 	}
 
 	public void update(Languages languages) {

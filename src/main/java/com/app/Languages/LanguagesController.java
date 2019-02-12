@@ -32,8 +32,8 @@ public class LanguagesController {
 	
 	@RolesAllowed("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public void addLanguages(@RequestBody Languages languages) {
-		languagesService.create(languages);
+	public Languages addLanguages(@RequestBody Languages languages) {
+		return languagesService.create(languages);
 	}
 	
 	@RolesAllowed("ROLE_ADMIN")
