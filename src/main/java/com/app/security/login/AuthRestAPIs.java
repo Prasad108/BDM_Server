@@ -30,7 +30,7 @@ import com.app.security.message.SignUpForm;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.app.Languages.LanguagesService;
 import com.app.Type.TypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/book") 
 public class BookController {
