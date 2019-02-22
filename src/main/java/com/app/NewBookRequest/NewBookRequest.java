@@ -4,12 +4,23 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.app.Role.Roles;
+import com.app.User.User;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "new_book_request", catalog = "bdm")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class NewBookRequest {
 	
 	private Integer id;
@@ -18,7 +29,9 @@ public class NewBookRequest {
 	private String bookType;
 	private Integer price;
 	private String abbrivation;
-	private String user;
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = User.class)
+	@JsonIdentityReference(alwaysAsId=true)
+	private User user;
 	private String remark;
 	private String status;
 	
@@ -99,17 +112,18 @@ public class NewBookRequest {
 		this.status = status;
 	}
 
-	@Column(name = "user", nullable = false)
-	public String getUser() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user")
+	public User getUser() {
 		return user;
 	}
 
 
-	public void setUser(String user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	@Column(name = "remarks", nullable = false)
+	@Column(name = "remarks")
 	public String getRemark() {
 		return remark;
 	}

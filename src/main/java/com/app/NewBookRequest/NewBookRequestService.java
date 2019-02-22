@@ -8,6 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.User.UserRepository;
+import com.app.User.UserService;
+
 import javassist.expr.NewArray;
 
 @Service
@@ -17,6 +20,10 @@ public class NewBookRequestService {
 	
 	@Autowired
 	private NewBookRequestRepository requestRepo;
+	
+	
+	@Autowired
+	UserService userService;
 	
 	public void create(NewBookRequest request)
 	{
@@ -48,7 +55,7 @@ public class NewBookRequestService {
 	public List<NewBookRequest> getRequestListByUser(String name) {
 		
 		List<NewBookRequest> requests=new ArrayList<NewBookRequest>();
-		requests=requestRepo.getNewBookRequestsByUser(name);
+		requests=requestRepo.getNewBookRequestsByUser(userService.getCurrentUserDetails(name));
 		return requests;
 	}
 	

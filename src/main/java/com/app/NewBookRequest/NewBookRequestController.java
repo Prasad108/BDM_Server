@@ -3,6 +3,8 @@ package com.app.NewBookRequest;
 import java.security.Principal;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.User.User;
+import com.app.User.UserService;
+
 @RestController
 @RequestMapping("/newBookRequest")
 public class NewBookRequestController {
 	
 	@Autowired
 	private NewBookRequestService service;
+	
+	@Autowired
+	UserService userService;
+	
 	
 	@RequestMapping(value="/",method=RequestMethod.GET, produces="application/json")
 	public List<NewBookRequest> getAllRequests()
@@ -27,7 +36,7 @@ public class NewBookRequestController {
 	@RequestMapping(value="/", method=RequestMethod.PUT)
 	public void saveRequest(@RequestBody NewBookRequest request, Principal principal)
 	{
-		request.setUser(principal.getName());
+		request.setUser(userService.getCurrentUserDetails(principal.getName()));
 		request.setStatus("pending");
 		service.create(request);
 	}
@@ -45,6 +54,7 @@ public class NewBookRequestController {
 		return service.findById(id);
 	}
 	
+	@RolesAllowed("ROLE_SUPERADMIN")
 	@RequestMapping(value="/confirmRequest/",method=RequestMethod.PUT)
 	public void updateRequest(@RequestBody NewBookRequest request) {
 		service.updateById(request.getId(), request.getStatus().toLowerCase(), request.getRemark());

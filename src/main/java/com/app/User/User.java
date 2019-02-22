@@ -1,19 +1,21 @@
 package com.app.User;
 // Generated 29 Nov, 2018 1:33:50 PM by Hibernate Tools 5.2.10.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.app.Center.Center;
 import com.app.Challan.Challan;
@@ -95,7 +97,7 @@ public class User implements java.io.Serializable {
 		this.center = center;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role")
 	public Roles getRoles() {
 		return this.roles;

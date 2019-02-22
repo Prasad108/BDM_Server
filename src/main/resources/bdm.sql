@@ -325,6 +325,42 @@ INSERT INTO `languages` (`id`, `name`) VALUES (1,'Marathi'),(2,'Hindi'),(3,'Tami
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+
+
+--
+-- Table structure for table `new_book_request`
+--
+
+DROP TABLE IF EXISTS `new_book_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `new_book_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `abbrivation` varchar(255) NOT NULL,
+  `bname` varchar(255) NOT NULL,
+  `btype` varchar(255) NOT NULL,
+  `blang` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL,
+  `user` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_FK_IN_new_book_request` (`user`),
+  CONSTRAINT `user_FK_IN_new_book_request` FOREIGN KEY (`user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `new_book_request`
+--
+
+LOCK TABLES `new_book_request` WRITE;
+/*!40000 ALTER TABLE `new_book_request` DISABLE KEYS */;
+INSERT INTO `new_book_request` (`id`, `abbrivation`, `bname`, `btype`, `blang`, `price`, `remarks`, `status`, `user`) VALUES (1,'HP1','PRASAD DUKALE','Big','vzx',3,'dtghy','approved',2),(2,'HP1','PRASAD DUKALE','Big','vzx',3,'sg','rejected',2),(3,'HP1','PRASAD DUKALE','zvvzx','vzx',1,'','pending',2),(4,'HP1','PRASAD DUKALE','zvvzx','vzx',1,'','pending',2),(5,'HP1','PRASAD DUKALE','zvvzx','vzx',1,'fh','approved',2),(6,'HP1','PRASAD DUKALE','zvvzx','vzx',1,'dxfh','approved',2),(7,'dsfg','PRASAD DUKALE','zvvzx','English',2,'','pending',2),(8,'dsgfsd','sdfg','dsfg','gsfdg',2,'dh','approved',2),(9,'dfhg','gsdf','dsfg','dfsg',12,'','pending',2),(10,'sadgf','sgd','sdg','gsfd',2,'as','rejected',2),(11,'JSD','Journey Of  Self Discovery ','small','Tamil',150,'we cannot avail this book ','rejected',2),(12,'HP1','PRASAD DUKALE','zvvzx','English',2,NULL,'approved',5),(13,'HP1','Prasad Ashok Dukale','zvvzx','English',2,NULL,'pending',5);
+/*!40000 ALTER TABLE `new_book_request` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `roles`
 --

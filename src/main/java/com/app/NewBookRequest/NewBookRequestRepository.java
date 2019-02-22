@@ -6,14 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-import com.app.Challan.Challan;
+import com.app.User.User;
 
 public interface NewBookRequestRepository extends CrudRepository<NewBookRequest, Integer>{
 	
-	@Query("SELECT request FROM NewBookRequest request where request.user = :username")
-	public List<NewBookRequest> getNewBookRequestsByUser(@Param("username") String username);
+	@Query("SELECT request FROM NewBookRequest request where request.user = :user")
+	public List<NewBookRequest> getNewBookRequestsByUser(@Param("user") User user);
 	
 	@Modifying
 	@Query("UPDATE NewBookRequest request set request.status=:status, request.remark=:remark where request.id=:requestId")
