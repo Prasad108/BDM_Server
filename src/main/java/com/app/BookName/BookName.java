@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class BookName {
 	private Integer id;
 	private String name;
-	private String abbreviation;
+
 	@JsonIgnore
 	private Set<Book> books = new HashSet<Book>(0);
 	
@@ -33,28 +33,25 @@ public class BookName {
 
 
 
-	public BookName(String name, String abbreviation) {
+	public BookName(String name) {
 		super();
-		this.name = name;
-		this.abbreviation = abbreviation;
+		this.name = name;	
 	}
 	
 	
 
-	public BookName(Integer id, String name, String abbreviation, Set<Book> books) {
+	public BookName(Integer id, String name, Set<Book> books) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.abbreviation = abbreviation;
 		this.books = books;
 	}
 
 
 
-	public BookName(String name, String abbreviation, Set<Book> books) {
+	public BookName(String name, Set<Book> books) {
 		super();
 		this.name = name;
-		this.abbreviation = abbreviation;
 		this.books = books;
 	}
 
@@ -78,15 +75,5 @@ public class BookName {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name = "abbreviation", length = 45)
-	public String getAbbreviation() {
-		return abbreviation;
-	}
-
-	public void setAbbreviation(String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
-	
-	
-
+		
 }

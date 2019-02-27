@@ -56,13 +56,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `book_name`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `book_name` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `abbreviation` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +70,7 @@ CREATE TABLE `book_name` (
 
 LOCK TABLES `book_name` WRITE;
 /*!40000 ALTER TABLE `book_name` DISABLE KEYS */;
-INSERT INTO `book_name` (`id`, `name`, `abbreviation`) VALUES (1,'Bhagwat Gita','BG'),(2,'Matchless Gift','MGFT'),(3,'Science of Self Realization','SSR');
+INSERT INTO `book_name` VALUES (1,'Bhagwat Gita'),(2,'Matchless Gift'),(3,'Science of Self Realization'),(4,'Antaricha Diva'),(5,'Journey Home');
 /*!40000 ALTER TABLE `book_name` ENABLE KEYS */;
 UNLOCK TABLES;
 
