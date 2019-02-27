@@ -45,9 +45,14 @@ public class Challan implements java.io.Serializable {
 	private Integer expAmount;
 	private String expComment;
 	private byte settled;
-//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
+	private boolean inventoryChallan;
+	private boolean addedToInventory;
+
+
+
+	//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
 //	@JsonIdentityReference(alwaysAsId=true)
-	private Set<CbDetails> cbDetailses = new HashSet<CbDetails>(0);
+	private Set<CbDetails> cbDetailses = new HashSet<>(0);
 
 	public Challan() {
 	}
@@ -177,6 +182,24 @@ public class Challan implements java.io.Serializable {
 
 	public void setCbDetailses(Set<CbDetails> cbDetailses) {
 		this.cbDetailses = cbDetailses;
+	}
+
+	@Column(name = "is_inventory_challan", nullable = false)
+	public boolean isInventoryChallan() {
+		return inventoryChallan;
+	}
+
+	public void setInventoryChallan(boolean inventoryChalln) {
+		this.inventoryChallan = inventoryChalln;
+	}
+
+	public boolean isAddedToInventory() {
+		return addedToInventory;
+	}
+
+	@Column(name = "is_added_to_inventory", nullable = false)
+	public void setAddedToInventory(boolean addedToInventory) {
+		this.addedToInventory = addedToInventory;
 	}
 
 }
