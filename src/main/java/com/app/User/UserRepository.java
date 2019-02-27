@@ -23,7 +23,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
    	public List<User> getUsersOfCenterByCenterId(@Param("id") Integer id);
     
     @Modifying
-    @Query(value = "update User u set name  = :name, email =:email, mob=:mob, role= :roles, counceller=:counceller  where id =:id", 
+    @Query(value = "update user u set name  = :name, email =:email, mob=:mob, role= :roles, counceller=:counceller  where id =:id", 
       nativeQuery = true)
     int updateUser(@Param("id") Integer id,@Param("name") String name,@Param("email") String email,@Param("mob") String mob,@Param("roles") Roles roles,@Param("counceller") String counceller);
 
