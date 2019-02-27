@@ -459,7 +459,7 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'bdm'
 --
-*!50003 DROP PROCEDURE IF EXISTS `calculateChallanTotal` */;
+
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -469,10 +469,11 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
+DROP PROCEDURE IF EXISTS `calculateChallanTotal`;;
 CREATE  PROCEDURE `calculateChallanTotal`(IN challan_Id INT)
 BEGIN
 DECLARE challan_Total int;
-Select  SUM(cb.rate * cb.quantity) AS ChallanTotal into @challan_Total from `bdm`.`cb_details` cb where cb.challan=challan_Id;
+Select  SUM(cb.rate * (cb.quantity-cb.returned)) AS ChallanTotal into @challan_Total from `bdm`.`cb_details` cb where cb.challan=challan_Id;
 UPDATE `bdm`.`challan` SET `total_amount`=@challan_Total WHERE `id`=challan_Id;
 END ;;
 DELIMITER ;
