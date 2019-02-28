@@ -30,6 +30,7 @@ CREATE TABLE `book` (
   `price` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `lang` int(11) NOT NULL,
+  `abbr` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type_FK_idx` (`type`),
   KEY `lang_FK_idx` (`lang`),
@@ -46,9 +47,10 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` (`id`, `name`, `price`, `type`, `lang`) VALUES (1,1,100,1,1),(2,1,100,1,2),(3,1,100,2,7),(4,2,100,1,3),(5,1,100,1,1),(6,1,100,1,1),(7,1,100,1,1),(8,3,100,1,1);
+INSERT INTO `book` (`id`, `name`, `price`, `type`, `lang`, `abbr`) VALUES (1,1,100,1,1,''),(2,1,100,1,2,''),(3,1,100,2,7,''),(4,2,100,1,3,''),(5,1,100,1,1,''),(6,1,100,1,1,''),(7,1,100,1,1,''),(8,3,100,1,1,'');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `book_name`
@@ -123,19 +125,21 @@ DROP TRIGGER IF EXISTS updateChallanTotalAndInventoryOnCbDetailsInsert;;
 BEGIN
 
 	DECLARE inventoryIdToUpdate INT;
+	DECLARE isItInveontoryChallan INT;
 
-  	SELECT DISTINCT i.id into @inventoryIdToUpdate  FROM 
-	cb_details cb, challan ch, book b, center c, inventry i, user u 
-	WHERE 
+  	SELECT DISTINCT i.id, ch.is_inventory_challan into @inventoryIdToUpdate, @isItInveontoryChallan  FROM
+	cb_details cb, challan ch, book b, center c, inventry i, user u
+	WHERE
 	cb.challan= ch.id  AND
 	ch.issued_by =u.id AND
 	cb.book = b.id AND
 	i.book =b.id AND
 	i.center =c.id AND
-	cb.id=NEW.id;    
-    
-	UPDATE inventry set quantity =quantity - NEW.quantity where id=@inventoryIdToUpdate;
-   
+	cb.id=NEW.id;
+
+    IF @isItInveontoryChallan = 0 THEN
+		UPDATE inventry set quantity =quantity - NEW.quantity where id=@inventoryIdToUpdate;
+	END IF;
    call bdm.calculateChallanTotal(NEW.challan);
 
 END */;;
@@ -159,8 +163,9 @@ DROP TRIGGER IF EXISTS updateChallanTotalAndInventoryOnCbDetailsUpdate;;
 
 BEGIN
 	DECLARE inventoryIdToUpdate INT;
+	DECLARE isItInveontoryChallan INT;
 
-  	SELECT DISTINCT i.id into @inventoryIdToUpdate  FROM 
+  	SELECT DISTINCT i.id, ch.is_inventory_challan into @inventoryIdToUpdate, @isItInveontoryChallan  FROM
 	cb_details cb, challan ch, book b, center c, inventry i, user u 
 	WHERE 
 	cb.challan= ch.id  AND
@@ -169,9 +174,10 @@ BEGIN
 	i.book =b.id AND
 	i.center =c.id AND
 	cb.id=NEW.id;   
-    
-    UPDATE inventry set quantity = quantity - ( cast((NEW.quantity - NEW.returned) as signed) - cast((OLD.quantity - OLD.returned)as signed) ) where id=@inventoryIdToUpdate;
 
+    IF @isItInveontoryChallan = 0 THEN
+        UPDATE inventry set quantity = quantity - ( cast((NEW.quantity - NEW.returned) as signed) - cast((OLD.quantity - OLD.returned)as signed) ) where id=@inventoryIdToUpdate;
+    END IF;
    call bdm.calculateChallanTotal(NEW.challan);
 
 END */;;
@@ -251,6 +257,8 @@ CREATE TABLE `challan` (
   `total_amount` int(11) DEFAULT NULL,
   `issued_by` int(11) NOT NULL,
   `issued_to` int(11) NOT NULL,
+  `added_to_inventory` bit(1) NOT NULL,
+  `is_inventory_challan` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Issued_To` (`issued_to`),
   KEY `Issued_BY_FK` (`issued_by`),
@@ -265,9 +273,10 @@ CREATE TABLE `challan` (
 
 LOCK TABLES `challan` WRITE;
 /*!40000 ALTER TABLE `challan` DISABLE KEYS */;
-INSERT INTO `challan` (`id`, `exp_amount`, `exp_comment`, `issued_date`, `received_amount`, `settled`, `settled_date`, `total_amount`, `issued_by`, `issued_to`) VALUES (1,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4),(2,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4),(3,NULL,NULL,'2008-10-03 22:59:52',NULL,1,NULL,NULL,1,4),(4,NULL,NULL,'2019-01-17 15:31:28',NULL,0,NULL,0,5,2),(5,NULL,NULL,'2019-01-17 15:32:05',NULL,0,NULL,0,5,4),(6,NULL,NULL,'2019-01-17 15:35:51',NULL,0,NULL,0,5,2),(7,NULL,NULL,'2019-01-17 15:37:55',NULL,0,NULL,0,5,5),(8,NULL,NULL,'2019-01-17 15:50:51',NULL,0,NULL,0,5,2);
+INSERT INTO `challan` (`id`, `exp_amount`, `exp_comment`, `issued_date`, `received_amount`, `settled`, `settled_date`, `total_amount`, `issued_by`, `issued_to`, `added_to_inventory`, `is_inventory_challan`) VALUES (1,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4,'\0','\0'),(2,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4,'\0','\0'),(3,NULL,NULL,'2008-10-03 22:59:52',NULL,1,NULL,NULL,1,4,'\0','\0'),(4,NULL,NULL,'2019-01-17 15:31:28',NULL,0,NULL,0,5,2,'\0','\0'),(5,NULL,NULL,'2019-01-17 15:32:05',NULL,0,NULL,0,5,4,'\0','\0'),(6,NULL,NULL,'2019-01-17 15:35:51',NULL,0,NULL,0,5,2,'\0','\0'),(7,NULL,NULL,'2019-01-17 15:37:55',NULL,0,NULL,0,5,5,'\0','\0'),(8,NULL,NULL,'2019-01-17 15:50:51',NULL,0,NULL,0,5,2,'\0','\0');
 /*!40000 ALTER TABLE `challan` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `inventry`
