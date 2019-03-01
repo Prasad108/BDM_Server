@@ -32,7 +32,6 @@ public class BookName {
 	}
 
 
-
 	public BookName(String name) {
 		super();
 		this.name = name;	
