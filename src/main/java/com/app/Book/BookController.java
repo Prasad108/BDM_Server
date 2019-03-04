@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.Languages.LanguagesService;
 import com.app.Type.TypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 @CrossOrigin
 @RestController
@@ -66,5 +67,9 @@ public class BookController {
 	public String getDetailedBook(@PathVariable Integer id) {
 		return bookService.getDetailedBook(id);
 	}
-
+	
+	@RequestMapping(value = "/getAllBookInDetail", method = RequestMethod.GET,produces = "application/json")
+	public ArrayNode getAllBookInDetail() {
+		return bookService.getAllBookInDetail();
+	}
 }
