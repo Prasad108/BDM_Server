@@ -147,4 +147,27 @@ public class ChallanService  {
 		return challanRepository.checkIfChallanIsSettled(id).isPresent();
 	}
 
+    public ArrayNode getAllInwardOfUsersCenter(String name) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode challanArray = mapper.createArrayNode();
+
+		for(Challan ch : challanRepository.getAllInwardChallanOfUsersCenter(name)) {
+			challanArray.add(getChallanDetailsWithFullUser(ch));
+		}
+
+		return challanArray;
+    }
+
+	public Challan creatInwardNewChallan(Principal principal) {
+		Challan challan= new Challan();
+		User issuedBy = userRepository.findByUsername(principal.getName()).orElseThrow(() ->
+				new UsernameNotFoundException("User Not Found with -> username : " + principal.getName()));
+		challan.setUserByIssuedBy(issuedBy);
+		challan.setUserByIssuedTo(issuedBy);
+		challan.setIssuedDate(new Date());
+		challan.setSettled((byte)0);
+		challan.setTotalAmount(0);
+		challan.setInventoryChallan(true);
+		return challanRepository.save(challan);
+	}
 }
