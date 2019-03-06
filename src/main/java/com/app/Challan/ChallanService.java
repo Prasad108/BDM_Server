@@ -170,4 +170,13 @@ public class ChallanService  {
 		challan.setInventoryChallan(true);
 		return challanRepository.save(challan);
 	}
+
+	public Challan addToInventory(int id){
+		Challan ch=challanRepository.findById(id).get();
+		if(!ch.isAddedToInventory()){
+			ch.setAddedToInventory(true);
+			update(ch);
+		}
+		return ch;
+	}
 }

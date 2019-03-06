@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.app.Challan.Challan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,8 +82,10 @@ public class CbDetailsService  {
 		l.setId(lang);
 		Type t= new Type();
 		t.setId(type);
+		Challan c= new Challan();
+		c.setId(challan);
 //		CbDetails cb
-		Optional<CbDetails> optional=cbDetailsRepository.getCbDetailFromChallanWithRequestedNameLangType(challan,bn,l,t);
+		Optional<CbDetails> optional=cbDetailsRepository.getCbDetailFromChallanWithRequestedNameLangType(c,bn,l,t);
 		if(optional.isPresent()) {
 			CbDetails cb=optional.get();
 			JsonNode  result=	mapper.readTree(detaliedCbDetail(cb.getId()));
@@ -114,8 +117,10 @@ public class CbDetailsService  {
 		l.setId(lang);
 		Type t= new Type();
 		t.setId(type);
+		Challan c= new Challan();
+		c.setId(challan);
 //		CbDetails cb
-		Optional<CbDetails> optional=cbDetailsRepository.getCbDetailFromChallanWithRequestedNameLangType(challan,bn,l,t);
+		Optional<CbDetails> optional=cbDetailsRepository.getCbDetailFromChallanWithRequestedNameLangType(c,bn,l,t);
 		if(optional.isPresent()) {
 			CbDetails cb=optional.get();
 			JsonNode  result=	mapper.readTree(detaliedCbDetail(cb.getId()));

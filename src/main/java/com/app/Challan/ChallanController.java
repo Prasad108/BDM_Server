@@ -119,4 +119,10 @@ public class ChallanController {
 		
 	}
 
+	@RequestMapping(value="/addToInventory/{id}", method=RequestMethod.GET, produces="application/json")
+	public Challan addToInventory(@PathVariable Integer id)
+	{
+		return challanService.addToInventory(id);
+	}
+
 }
