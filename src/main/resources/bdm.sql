@@ -134,6 +134,9 @@ BEGIN
 	ch.issued_by =u.id AND
 	cb.book = b.id AND
 	i.book =b.id AND
+    ch.issued_by=u.id AND
+    u.center=c.id AND
+	i.book =b.id AND
 	i.center =c.id AND
 	cb.id=NEW.id;
 
@@ -167,13 +170,16 @@ BEGIN
 
   	SELECT DISTINCT i.id, ch.is_inventory_challan into @inventoryIdToUpdate, @isItInveontoryChallan  FROM
 	cb_details cb, challan ch, book b, center c, inventry i, user u 
-	WHERE 
-	cb.challan= ch.id  AND
-	ch.issued_by =u.id AND
-	cb.book = b.id AND
-	i.book =b.id AND
-	i.center =c.id AND
-	cb.id=NEW.id;   
+	WHERE
+    cb.challan= ch.id  AND
+    ch.issued_by =u.id AND
+    cb.book = b.id AND
+    i.book =b.id AND
+    ch.issued_by=u.id AND
+    u.center=c.id AND
+    i.book =b.id AND
+    i.center =c.id AND
+    cb.id=NEW.id;
 
     IF @isItInveontoryChallan = 0 THEN
         UPDATE inventry set quantity = quantity - ( cast((NEW.quantity - NEW.returned) as signed) - cast((OLD.quantity - OLD.returned)as signed) ) where id=@inventoryIdToUpdate;
