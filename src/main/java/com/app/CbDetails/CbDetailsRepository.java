@@ -2,6 +2,7 @@ package com.app.CbDetails;
 
 import java.util.Optional;
 
+import com.app.Challan.Challan;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,7 +19,7 @@ public interface CbDetailsRepository extends CrudRepository<CbDetails, Integer> 
 			"AND b.name= :name " + 
 			"AND b.languages= :lang " + 
 			"AND b.type= :type " + 
-			"AND c.id= :challan")
-	public Optional<CbDetails> getCbDetailFromChallanWithRequestedNameLangType(@Param("challan") Integer challan,@Param("name") BookName name,@Param("lang") Languages lang,@Param("type") Type type);
+			"AND cb.challan= :challan")
+	public Optional<CbDetails> getCbDetailFromChallanWithRequestedNameLangType(@Param("challan") Challan challan, @Param("name") BookName name, @Param("lang") Languages lang, @Param("type") Type type);
 
 }

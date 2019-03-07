@@ -85,6 +85,18 @@ public class ChallanController {
 	public ArrayNode getDetailedChallanOfCenter(Principal principal,Authentication authentication) throws IOException {
 		return challanService.getAllOfUsersCenter(principal.getName());
 	}
+
+	@RolesAllowed("ROLE_ADMIN")
+	@RequestMapping(value = "/inward/detailedChallnListForUsersCenter", method = RequestMethod.GET,produces = "application/json")
+	public ArrayNode getDetailedInwardChallanOfCenter(Principal principal,Authentication authentication) throws IOException {
+		return challanService.getAllInwardOfUsersCenter(principal.getName());
+	}
+
+	@RolesAllowed("ROLE_ADMIN")
+	@RequestMapping(value = "/inward/new", method = RequestMethod.GET,produces = "application/json")
+	public Challan createInwardChallan(Principal principal) {
+		return challanService.creatInwardNewChallan(principal);
+	}
 	
 	@RequestMapping(value="/userSpecificChallanList", method=RequestMethod.GET, produces="application/json")
 	public ArrayNode getUserSpecificChallanList(Principal principal, Authentication authentication) throws IOException
@@ -105,6 +117,12 @@ public class ChallanController {
 	{
 		return challanService.checkIfChallanIsSettled(id);
 		
+	}
+
+	@RequestMapping(value="/addToInventory/{id}", method=RequestMethod.GET, produces="application/json")
+	public Challan addToInventory(@PathVariable Integer id)
+	{
+		return challanService.addToInventory(id);
 	}
 
 }

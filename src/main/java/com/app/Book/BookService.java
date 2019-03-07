@@ -2,7 +2,9 @@ package com.app.Book;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
+import com.app.Languages.Languages;
+import com.app.Type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,6 +99,10 @@ public class BookService  {
 		System.out.println("get All book in detail");
 		System.out.println(bookArray);
 		return bookArray;
+	}
+
+	public Optional<Book> FindByNameTypeLang(BookName bn, Languages l, Type t){
+		return bookRepository.FindByNameTypeLang(bn, l, t);
 	}
 		
 

@@ -47,7 +47,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` (`id`, `name`, `price`, `type`, `lang`, `abbr`) VALUES (1,1,100,1,1,''),(2,1,100,1,2,''),(3,1,100,2,7,''),(4,2,100,1,3,''),(5,1,100,1,1,''),(6,1,100,1,1,''),(7,1,100,1,1,''),(8,3,100,1,1,'');
+INSERT INTO `book` (`id`, `name`, `price`, `type`, `lang`, `abbr`) VALUES (1,1,100,1,1,''),(2,1,100,1,2,''),(3,1,100,2,7,''),(4,2,100,1,3,'');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `cb_details` (
 
 LOCK TABLES `cb_details` WRITE;
 /*!40000 ALTER TABLE `cb_details` DISABLE KEYS */;
-INSERT INTO `cb_details` (`id`, `challan`, `book`, `rate`, `quantity`, `returned`, `sale_value`) VALUES (1,1,1,100,10,0000000007,300),(2,1,2,102,10,0000000000,1020);
+INSERT INTO `cb_details` (`id`, `challan`, `book`, `rate`, `quantity`, `returned`, `sale_value`) VALUES (1,11,1,100,200,0000000000,20000),(2,11,2,100,200,0000000000,20000),(3,11,4,100,50,0000000000,5000),(4,12,1,100,20,0000000000,2000),(5,12,2,100,20,0000000000,2000),(6,13,1,100,20,0000000000,2000),(7,13,2,100,20,0000000000,2000);
 /*!40000 ALTER TABLE `cb_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -133,6 +133,9 @@ BEGIN
 	cb.challan= ch.id  AND
 	ch.issued_by =u.id AND
 	cb.book = b.id AND
+	i.book =b.id AND
+    ch.issued_by=u.id AND
+    u.center=c.id AND
 	i.book =b.id AND
 	i.center =c.id AND
 	cb.id=NEW.id;
@@ -167,13 +170,16 @@ BEGIN
 
   	SELECT DISTINCT i.id, ch.is_inventory_challan into @inventoryIdToUpdate, @isItInveontoryChallan  FROM
 	cb_details cb, challan ch, book b, center c, inventry i, user u 
-	WHERE 
-	cb.challan= ch.id  AND
-	ch.issued_by =u.id AND
-	cb.book = b.id AND
-	i.book =b.id AND
-	i.center =c.id AND
-	cb.id=NEW.id;   
+	WHERE
+    cb.challan= ch.id  AND
+    ch.issued_by =u.id AND
+    cb.book = b.id AND
+    i.book =b.id AND
+    ch.issued_by=u.id AND
+    u.center=c.id AND
+    i.book =b.id AND
+    i.center =c.id AND
+    cb.id=NEW.id;
 
     IF @isItInveontoryChallan = 0 THEN
         UPDATE inventry set quantity = quantity - ( cast((NEW.quantity - NEW.returned) as signed) - cast((OLD.quantity - OLD.returned)as signed) ) where id=@inventoryIdToUpdate;
@@ -235,7 +241,7 @@ CREATE TABLE `center` (
 
 LOCK TABLES `center` WRITE;
 /*!40000 ALTER TABLE `center` DISABLE KEYS */;
-INSERT INTO `center` (`id`, `name`, `location`, `PM`, `POC_Details`) VALUES (1,'Atmanivedan Yoga','Hinjewadi','HG Varadraj Pr','Shivhsankar pr'),(2,'GGD','Vadgaon Bk','HG Amshu pr','Amit pr');
+INSERT INTO `center` (`id`, `name`, `location`, `PM`, `POC_Details`) VALUES (1,'Atmanivedan Yoga','Hinjewadi','HG Varadraj Pr','Shivhsankar pr'),(2,'GGD','Vadgaon Bk','HG Amshu pr','Amit pr'),(3,'SuperAdmin','Maharashtra','PAD','9657939975');
 /*!40000 ALTER TABLE `center` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,9 +279,27 @@ CREATE TABLE `challan` (
 
 LOCK TABLES `challan` WRITE;
 /*!40000 ALTER TABLE `challan` DISABLE KEYS */;
-INSERT INTO `challan` (`id`, `exp_amount`, `exp_comment`, `issued_date`, `received_amount`, `settled`, `settled_date`, `total_amount`, `issued_by`, `issued_to`, `added_to_inventory`, `is_inventory_challan`) VALUES (1,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4,'\0','\0'),(2,NULL,NULL,'2008-10-03 22:59:52',NULL,0,'2008-10-03 22:59:52',NULL,5,4,'\0','\0'),(3,NULL,NULL,'2008-10-03 22:59:52',NULL,1,NULL,NULL,1,4,'\0','\0'),(4,NULL,NULL,'2019-01-17 15:31:28',NULL,0,NULL,0,5,2,'\0','\0'),(5,NULL,NULL,'2019-01-17 15:32:05',NULL,0,NULL,0,5,4,'\0','\0'),(6,NULL,NULL,'2019-01-17 15:35:51',NULL,0,NULL,0,5,2,'\0','\0'),(7,NULL,NULL,'2019-01-17 15:37:55',NULL,0,NULL,0,5,5,'\0','\0'),(8,NULL,NULL,'2019-01-17 15:50:51',NULL,0,NULL,0,5,2,'\0','\0');
+INSERT INTO `challan` (`id`, `exp_amount`, `exp_comment`, `issued_date`, `received_amount`, `settled`, `settled_date`, `total_amount`, `issued_by`, `issued_to`, `added_to_inventory`, `is_inventory_challan`) VALUES (11,NULL,NULL,'2019-03-06 18:43:40',NULL,0,NULL,45000,5,5,'',''),(12,NULL,NULL,'2019-03-06 18:44:27',4000,1,'2019-03-06 18:44:58',4000,5,2,'\0','\0'),(13,NULL,NULL,'2019-03-06 18:45:10',NULL,0,NULL,4000,5,5,'',''),(14,NULL,NULL,'2019-03-06 18:45:42',NULL,0,NULL,0,5,4,'\0','\0'),(15,NULL,NULL,'2019-03-06 18:46:17',NULL,0,NULL,0,5,5,'\0','');
 /*!40000 ALTER TABLE `challan` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+DELIMITER ;;
+DROP TRIGGER IF EXISTS addChallanToInventory;;
+CREATE TRIGGER addChallanToInventory
+    BEFORE UPDATE ON `bdm`.`challan`
+    FOR EACH ROW
+
+BEGIN
+DECLARE centerId INT;
+		IF OLD.added_to_inventory = 0 THEN
+			IF NEW.added_to_inventory = 1 THEN
+				SELECT u.center into @centerId FROM user u, center c , challan ch where u.id= ch.issued_by AND u.center=c.id AND ch.id=NEW.id;
+				call bdm.updateInventryFromChallan(NEW.id, @centerId);
+			END IF;
+		END IF;
+END ;;
+DELIMITER ;
 
 
 --
@@ -304,7 +328,7 @@ CREATE TABLE `inventry` (
 
 LOCK TABLES `inventry` WRITE;
 /*!40000 ALTER TABLE `inventry` DISABLE KEYS */;
-INSERT INTO `inventry` (`id`, `book`, `quantity`, `center`) VALUES (1,2,0000000102,1),(3,1,0000000545,1),(7,3,0000000020,1),(9,4,0000000005,1);
+INSERT INTO `inventry` (`id`, `book`, `quantity`, `center`) VALUES (1,1,0000000200,1),(2,2,0000000200,1),(3,4,0000000050,1);
 /*!40000 ALTER TABLE `inventry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +476,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `counceller`, `email`, `mob`, `name`, `pwd`, `username`, `center`, `role`) VALUES (1,'Mind','asfusersd1dsa@gmail.com','7894561230','user1','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',2,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1),(4,'zyx','user@gmail.com','7894561230','user','$2a$10$DNRc0CLoBUllFzMIdREGzOaseVilSaGWkrei5D3VTbKGHKvmIJFxa','user',1,1),(5,'abcd','admin@gmail.com','7894561230','admin','$2a$10$2zkhh0gXvcPPtzkmqDNiAuW98s/j7Rc/G2kKq4OK4bL6V6CavbmaW','admin',1,2),(6,'Mind','asfusersd1ds1a@gmail.com','7894561230','superadmin','$2a$10$zAKzzlwt8SvRaxB5tQj4m.1QUl1r1VfgwbDqq1JHlKCjghLUxdeyG','superadmin',1,3);
+INSERT INTO `user` (`id`, `counceller`, `email`, `mob`, `name`, `pwd`, `username`, `center`, `role`) VALUES (1,'HG VRP','asfusersd1dsa@gmail.com','7894561230','HG Amar Kishore','$2a$10$hzFQih5I9F3toYrJmE1BfeGGGWRk.8MsqLrLwa4Lub94mWjocn1P2','userd1',2,2),(2,'HG Amshu pr','asfuserssdfd1dsa@gmail.com','7894561230','Prasad Ashok Dukale','$2a$10$kMFyJz7vn8yYc0r3Uemkw.tdG7Uq4cvEN.P54oxUuqgDRDSp7YKPG','prasad',1,1),(3,'HG VRP','kaushikrssdfd1dsa@gmail.com','7894561230','Kaushik Agraval','$2a$10$plSPnclNhpAnmSjTP0Eueey..I6RCywt0BH3do9URME.Mx5uXKLYa','kaushik',2,1),(4,'HG Amshu pr','user@gmail.com','7894561230','Rahul Sawale','$2a$10$DNRc0CLoBUllFzMIdREGzOaseVilSaGWkrei5D3VTbKGHKvmIJFxa','user',1,1),(5,'HG VRP','admin@gmail.com','7894561230','Anil Nalawade','$2a$10$2zkhh0gXvcPPtzkmqDNiAuW98s/j7Rc/G2kKq4OK4bL6V6CavbmaW','admin',1,2),(6,'superadmin','asfusersd1ds1a@gmail.com','7894561230','superadmin','$2a$10$zAKzzlwt8SvRaxB5tQj4m.1QUl1r1VfgwbDqq1JHlKCjghLUxdeyG','superadmin',3,3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,6 +507,86 @@ BEGIN
 DECLARE challan_Total int;
 Select  SUM(cb.rate * (cb.quantity-cb.returned)) AS ChallanTotal into @challan_Total from `bdm`.`cb_details` cb where cb.challan=challan_Id;
 UPDATE `bdm`.`challan` SET `total_amount`=@challan_Total WHERE `id`=challan_Id;
+END ;;
+DELIMITER ;
+
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS `updateInventryFromChallan`;;
+CREATE  PROCEDURE `updateInventryFromChallan`(IN challan_Id INT,IN center_Id INT)
+BEGIN
+	DECLARE book_Id int;
+	DECLARE book_quantity int;
+    DECLARE done INT;
+    DECLARE rowCount INT;
+	DECLARE cbDetailsCursor CURSOR FOR SELECT cb.book, cb.quantity FROM cb_details cb, challan ch WHERE cb.challan=ch.id AND ch.id=challan_Id AND ch.is_inventory_challan=1;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+    SET done = 0;
+	OPEN cbDetailsCursor;
+		loop1: LOOP
+
+			FETCH cbDetailsCursor INTO book_Id,book_quantity;
+
+				IF done = 1 THEN
+					LEAVE loop1;
+				END IF;
+                SELECT COUNT(*) into @rowCount FROM bdm.inventry where book=book_Id and center=center_Id;
+
+                IF @rowCount >0 THEN
+					UPDATE inventry SET quantity = quantity + book_quantity WHERE book=book_Id AND center=center_Id;
+				ELSE
+					INSERT INTO `inventry` (`book`, `quantity`, `center`) VALUES
+					(book_Id,book_quantity,center_Id);
+                END IF;
+		END LOOP loop1;
+
+
+	CLOSE cbDetailsCursor;
+END ;;
+DELIMITER ;
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS `getInventoryJSON`;;
+CREATE  PROCEDURE `getInventoryJSON`(IN username VARCHAR(1000),out JSON LONGTEXT)
+BEGIN
+
+DECLARE done INT;
+DECLARE foundAtLeastOne INT;
+DECLARE book_quantity INT;
+DECLARE book_name VARCHAR(1000);
+
+DECLARE InventoryCursor CURSOR FOR
+			 SELECT CONCAT(bn.name, ", ",l.name,", ", t.name ) as 'name',i.quantity as'value'
+             FROM bdm.inventry i,book b,languages l, type t,book_name bn
+             where
+				b.lang=l.id AND
+				b.name=bn.id AND
+				b.type=t.id AND
+				i.book=b.id AND
+				i.center IN(select u.center from user u where u.username=username);
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+SET done = 0;
+SET foundAtLeastOne=0;
+SET JSON="[";
+
+OPEN InventoryCursor;
+	loop1: LOOP
+
+    FETCH InventoryCursor INTO book_name,book_quantity;
+
+				IF done = 1 THEN
+					LEAVE loop1;
+				END IF;
+                SET foundAtLeastOne=1;
+			SET JSON=CONCAT(JSON,'{\"name\":\"',book_name,'\"',',\"value\":\"',book_quantity,'\"},');
+
+
+	END LOOP loop1;
+CLOSE InventoryCursor;
+IF foundAtLeastOne =1 THEN
+	SET JSON=LEFT(JSON,LENGTH(JSON)-1);
+END IF;
+SET JSON=CONCAT(JSON,"]");
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

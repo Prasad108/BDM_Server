@@ -1,5 +1,6 @@
 package com.app.Inventry;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -45,6 +46,11 @@ public class InventryController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public void deletInventry(@PathVariable Integer id) {
 		inventryService.delet(id);
+	}
+
+	@RequestMapping(value = "/getInventryDetailsOfCurrentUser", method = RequestMethod.GET)
+	public String getInventryDetailsOfCurrentUser(Principal principal) {
+		return inventryService.getInventryDetailsOfCurrentUser(principal.getName());
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.app.Inventry;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class InventryService  {
 
 	@Autowired
 	InventryRepository inventryRepository;
-	
+
 	public Inventry create(Inventry inventry) {
 		return inventryRepository.save(inventry);
 	}
@@ -45,5 +46,9 @@ public class InventryService  {
 	public Optional<List<Object[]>> findByUserCenterLangNameandType(BookName bn, Languages l, Type t, String username) {
 		return inventryRepository.findByUserCenterLangNameandType(bn,l,t,username);
 	};
+
+	public String getInventryDetailsOfCurrentUser(String username) {
+		return inventryRepository.getInventoryJSON(username);
+	}
 
 }

@@ -3,16 +3,9 @@ package com.app.Inventry;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.app.Book.Book;
 import com.app.Center.Center;
@@ -25,6 +18,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name = "inventry", catalog = "bdm")
+@NamedStoredProcedureQuery(name = "Inventry.getInventoryJSON", procedureName = "getInventoryJSON", parameters = {
+		@StoredProcedureParameter(mode = ParameterMode.IN, name = "username", type = String.class),
+		@StoredProcedureParameter(mode = ParameterMode.OUT, name = "JSON", type = String.class) })
 public class Inventry implements java.io.Serializable {
 
 	private Integer id;
