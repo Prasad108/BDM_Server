@@ -543,6 +543,52 @@ BEGIN
 	CLOSE cbDetailsCursor;
 END ;;
 DELIMITER ;
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS `getInventoryJSON`;;
+CREATE  PROCEDURE `getInventoryJSON`(IN username VARCHAR(1000),out JSON LONGTEXT)
+BEGIN
+
+DECLARE done INT;
+DECLARE foundAtLeastOne INT;
+DECLARE book_quantity INT;
+DECLARE book_name VARCHAR(1000);
+
+DECLARE InventoryCursor CURSOR FOR
+			 SELECT CONCAT(bn.name, ", ",l.name,", ", t.name ) as 'name',i.quantity as'value'
+             FROM bdm.inventry i,book b,languages l, type t,book_name bn
+             where
+				b.lang=l.id AND
+				b.name=bn.id AND
+				b.type=t.id AND
+				i.book=b.id AND
+				i.center IN(select u.center from user u where u.username=username);
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+SET done = 0;
+SET foundAtLeastOne=0;
+SET JSON="[";
+
+OPEN InventoryCursor;
+	loop1: LOOP
+
+    FETCH InventoryCursor INTO book_name,book_quantity;
+
+				IF done = 1 THEN
+					LEAVE loop1;
+				END IF;
+                SET foundAtLeastOne=1;
+			SET JSON=CONCAT(JSON,'{\"name\":\"',book_name,'\"',',\"value\":\"',book_quantity,'\"},');
+
+
+	END LOOP loop1;
+CLOSE InventoryCursor;
+IF foundAtLeastOne =1 THEN
+	SET JSON=LEFT(JSON,LENGTH(JSON)-1);
+END IF;
+SET JSON=CONCAT(JSON,"]");
+
+END ;;
+DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;

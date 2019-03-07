@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -26,4 +27,6 @@ public interface InventryRepository extends CrudRepository<Inventry, Integer> {
 			"AND b.type= :type ")
 	public Optional<List<Object[]>> findByUserCenterLangNameandType(@Param("Bname") BookName bn,@Param("lang") Languages l,@Param("type") Type t,@Param("name") String username);
 
+	@Procedure
+	String getInventoryJSON(String username);
 }
