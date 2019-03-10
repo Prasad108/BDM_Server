@@ -70,4 +70,10 @@ public class CbDetailsController {
 		return cbDetailsService.getCbDetailFromChallanWithRequestedNameLangType(challan,name,lang,type,principal.getName());
 	}
 
+	@RequestMapping(value = "/getInwardCbDetailFromChallanWithRequestedNameLangType/{challan}/{name}/{lang}/{type}", method = RequestMethod.GET,produces = "application/json")
+	public String getInwardCbDetailFromChallanWithRequestedNameLangType(@PathVariable Integer challan,
+																  @PathVariable Integer name,@PathVariable Integer lang,@PathVariable Integer type,Principal principal) throws IOException {
+		return cbDetailsService.getInwardCbDetailFromChallanWithRequestedNameLangType(challan,name,lang,type);
+	}
+
 }
