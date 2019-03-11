@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +16,16 @@ public class ReportService {
 
 
     @Autowired
-    ReportsRepository reportsRepository;
+    private ReportsRepository reportsRepository;
 
-    public String getTotalBDInDateRange( ReportForm report,String name){
+    public  List<TotalBDWithinDateRange> getTotalBDInDateRange( ReportForm report,String name){
         Optional<List<Object[]>> result = reportsRepository.findByUserCenterLangNameandType(report.getStartDate(),report.getEndDate(),name);
-        return "";
+        List<TotalBDWithinDateRange> output= new ArrayList<>();
+        result.ifPresent(objects -> objects
+                .forEach(e -> {
+                    output.add(new TotalBDWithinDateRange((Integer) e[0], (String) e[1], (String) e[2], (String) e[3], (Long) e[4], (Long) e[5]));
+                }));
+        return output;
     }
 
 }
