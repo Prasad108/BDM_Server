@@ -19,4 +19,7 @@ public class ReportController {
     public List<TotalBDWithinDateRange> getTotalBDInDateRange(@Valid @RequestBody ReportForm report, Principal principal){
         return reportService.getTotalBDInDateRange(report, principal.getName());
     }
+
+
+
 }

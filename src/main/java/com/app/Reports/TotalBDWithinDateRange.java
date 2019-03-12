@@ -7,6 +7,8 @@ public class TotalBDWithinDateRange {
     private String bookType;
     private Long numberOfBooks;
     private Long totalSaleValue;
+    private int userId;
+    private String userName;
 
     public TotalBDWithinDateRange() {
     }
@@ -18,6 +20,33 @@ public class TotalBDWithinDateRange {
         this.bookType = bookType;
         this.numberOfBooks = numberOfBooks;
         this.totalSaleValue = totalSaleValue;
+    }
+
+    public TotalBDWithinDateRange(int bookId, String bookName, String bookLanguage, String bookType, Long numberOfBooks, Long totalSaleValue, int userId, String userName) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.bookLanguage = bookLanguage;
+        this.bookType = bookType;
+        this.numberOfBooks = numberOfBooks;
+        this.totalSaleValue = totalSaleValue;
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getBookId() {

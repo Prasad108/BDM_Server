@@ -61,8 +61,12 @@ public class User implements java.io.Serializable {
 		this.username  = uname;
 	}
 
+	public User(Integer id) {
+		this.id = id;
+	}
+
 	public User(Center center, Roles roles, String name, String counceller, String email, String mob, String uname,
-			String pwd, Set<Challan> challansForIssuedTo, Set<Challan> challansForIssuedBy) {
+				String pwd, Set<Challan> challansForIssuedTo, Set<Challan> challansForIssuedBy) {
 		this.center = center;
 		this.roles = roles;
 		this.name = name;
@@ -73,6 +77,10 @@ public class User implements java.io.Serializable {
 		this.pwd = pwd;
 		this.challansForIssuedTo = challansForIssuedTo;
 		this.challansForIssuedBy = challansForIssuedBy;
+	}
+
+	 public static User getUserById(int id){
+		return new User(id);
 	}
 
 	@Id
