@@ -14,8 +14,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ */
 public interface ReportsRepository extends CrudRepository<Challan, Integer> {
-
+    /**
+     * @param startDate - start date to search the Book Distribution
+     * @param endDate  - end date to search the Book Distribution
+     * @param userName - username of the user - output will contain the Book Distribution details of the this users center.
+     */
     @Query("SELECT b.id, bn.name,l.name,t.name, sum(cb.quantity-cb.returned) as sales,  sum(cb.saleValue) as salevalue FROM" +
             " CbDetails cb, Book b,BookName bn,Languages l,Type t " +
             "where  " +
@@ -32,6 +39,11 @@ public interface ReportsRepository extends CrudRepository<Challan, Integer> {
             "group by cb.book, bn.name,l.name,t.name")
     public Optional<List<Object[]>> findByUserCenterLangNameandType(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("username") String userName);
 
+    /**
+     * @param startDate - start date to search the Book Distribution
+     * @param endDate  - end date to search the Book Distribution
+     * @param userList - list of the user id of whome we want the Book Distribution details
+     */
     @Query("SELECT b.id, bn.name,l.name,t.name, sum(cb.quantity-cb.returned) as sales,  sum(cb.saleValue) as salevalue,u.id, u.name FROM" +
             " CbDetails cb, Book b,BookName bn,Languages l,Type t,User u, Challan ch " +
             "where  " +
