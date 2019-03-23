@@ -22,7 +22,7 @@ public class ReportService {
 
         List output= new ArrayList<>();
         switch(report.getReportName()){
-            case "TotalBDInDateRange":
+            case "TOTAL_BOOKS_DISTRIBUTED_BETWEEN_DATE_RANGE":
               reportsRepository.findByUserCenterLangNameandType(report.getStartDate(),report.getEndDate(),name)
                 .ifPresent(objects -> objects
                         .forEach(e -> {
