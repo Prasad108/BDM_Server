@@ -48,10 +48,6 @@ public class Challan implements java.io.Serializable {
 	private boolean inventoryChallan;
 	private boolean addedToInventory;
 
-
-
-	//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope = Book.class)
-//	@JsonIdentityReference(alwaysAsId=true)
 	private Set<CbDetails> cbDetailses = new HashSet<>(0);
 
 	public Challan() {
