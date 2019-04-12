@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 
+import com.app.Exceptions.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ public class BookController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@RolesAllowed("ROLE_ADMIN")
 	public Book getBook(@PathVariable Integer id) {
-		return bookService.find(id);
+		return bookService.find(id).orElseThrow(()->  new ResourceNotFound("Book Not Found"));
 	}
 	
 	@RolesAllowed("ROLE_ADMIN")
