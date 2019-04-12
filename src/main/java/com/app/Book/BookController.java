@@ -24,13 +24,13 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 public class BookController {
 	
 	@Autowired
-	BookService bookService;
+	private BookService bookService;
 	
 	@Autowired
-	LanguagesService languagesService;
+	private LanguagesService languagesService;
 	
 	@Autowired
-	TypeService typeService;
+	private TypeService typeService;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
