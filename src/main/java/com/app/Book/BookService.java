@@ -49,8 +49,8 @@ public class BookService  {
 		bookRepository.deleteById(id);
 	}
 
-	public Book find(int id) {
-		return bookRepository.findById(id).get();
+	public Optional<Book> find(int id) {
+		return bookRepository.findById(id);
 	}
 
 	public List<Book> getall() {
@@ -64,7 +64,7 @@ public class BookService  {
 	}
 	
 	public String getDetailedBook(int id) {
-		Book book= find(id);
+		Book book= find(id).get();
 		JsonNode rootNode = mapper.valueToTree(book);
 		JsonNode nameNode=mapper.valueToTree(bookNameService.find(book.getName().getId()));
 		((ObjectNode) rootNode).set("name", nameNode);
@@ -76,7 +76,7 @@ public class BookService  {
 	}
 	
 	public JsonNode getDetailedBookJSON(int id) {
-		Book book= find(id);
+		Book book= find(id).get();
 		JsonNode rootNode = mapper.valueToTree(book);
 		JsonNode nameNode=mapper.valueToTree(bookNameService.find(book.getName().getId()));
 		((ObjectNode) rootNode).set("name", nameNode);

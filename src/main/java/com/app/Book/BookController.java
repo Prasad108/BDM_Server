@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 
+import com.app.Exceptions.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,13 +24,13 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 public class BookController {
 	
 	@Autowired
-	BookService bookService;
+	private BookService bookService;
 	
 	@Autowired
-	LanguagesService languagesService;
+	private LanguagesService languagesService;
 	
 	@Autowired
-	TypeService typeService;
+	private TypeService typeService;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -42,7 +43,7 @@ public class BookController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@RolesAllowed("ROLE_ADMIN")
 	public Book getBook(@PathVariable Integer id) {
-		return bookService.find(id);
+		return bookService.find(id).orElseThrow(()->  new ResourceNotFound("Book Not Found"));
 	}
 	
 	@RolesAllowed("ROLE_ADMIN")
