@@ -1,22 +1,16 @@
 package com.app.Book;
 
-import java.util.List;
-
-import javax.annotation.security.RolesAllowed;
-
+import com.app.BookName.BookName;
 import com.app.Exceptions.ResourceNotFound;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.app.Languages.LanguagesService;
 import com.app.Type.TypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -73,4 +67,12 @@ public class BookController {
 	public ArrayNode getAllBookInDetail() {
 		return bookService.getAllBookInDetail();
 	}
+
+	@RequestMapping(value = "/findBook/{nameId}/{bookId}/{typeId}", method = RequestMethod.GET, produces = "application/json")
+	public ArrayNode findBook(@PathVariable Integer nameId, @PathVariable Integer bookId, @PathVariable Integer typeId) {
+		BookName bn = new BookName();
+		bn.setId(bookId);
+		return bookService.FindByNameTypeLang();
+	}
+
 }
