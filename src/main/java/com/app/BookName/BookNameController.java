@@ -1,21 +1,14 @@
 package com.app.BookName;
 
-import java.security.Principal;
-import java.util.List;
-
-import javax.annotation.security.RolesAllowed;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.app.Book.BookService;
 import com.app.Languages.Languages;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import java.security.Principal;
+import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/bookName") 
@@ -69,7 +62,7 @@ public class BookNameController {
 	
 	@RequestMapping(value = "/getBooNameOfAllBooks", method = RequestMethod.GET,produces = "application/json")
 	public List<BookName> getBooNameOfAllBooks() {
-		return bookNameService.getBooNameOfAllBooks();
+		return bookNameService.getBookNameOfAllBooks();
 	}
 
 }

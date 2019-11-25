@@ -1,11 +1,11 @@
 package com.app.BookName;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 
 public interface BookNameRepository extends CrudRepository<BookName, Integer> {
@@ -14,5 +14,5 @@ public interface BookNameRepository extends CrudRepository<BookName, Integer> {
 	public Optional<List<BookName>> getAllBookNameOfUsersInventory(@Param("username") String username);
 	
 	@Query("SELECT DISTINCT bn FROM  Book b, BookName bn WHERE bn.id=b.name")
-	public Optional<List<BookName>> getBooNameOfAllBooks();
+    public Optional<List<BookName>> getBookNameOfAllBooks();
 }

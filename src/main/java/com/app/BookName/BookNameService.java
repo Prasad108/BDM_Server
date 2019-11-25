@@ -1,19 +1,17 @@
 package com.app.BookName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.app.Languages.Languages;
 import com.app.Languages.LanguagesService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -74,9 +72,9 @@ public class BookNameService  {
 	
 	}
 
-	public List<BookName> getBooNameOfAllBooks() {
-		
-		return bookNameRepository.getBooNameOfAllBooks()
+	public List<BookName> getBookNameOfAllBooks() {
+
+		return bookNameRepository.getBookNameOfAllBooks()
 				.orElseThrow(() -> new RuntimeException("Error While Fetching all Book Names"));
 	}
 
